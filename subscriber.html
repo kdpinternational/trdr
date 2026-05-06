@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse Traders — TRDR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --w:#fff;--g1:#F5F5F7;--g2:#E8E8ED;
+  --ink:#1D1D1F;--ink2:#424245;--ink3:#6E6E73;--ink4:#86868B;
+  --blue:#0071E3;--green:#30A46C;--gd:rgba(48,164,108,.10);
+  --red:#D93025;--rd:rgba(217,48,37,.10);--amber:#B45309;--ad:rgba(180,83,9,.08);
+  --b1:rgba(0,0,0,.06);--b2:rgba(0,0,0,.10);
+  --f:'Figtree',sans-serif;--mono:'JetBrains Mono',monospace;
+  --r:8px;--r2:12px;--r3:18px;--r4:24px;
+  --sh:0 2px 8px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.04);
+  --sh2:0 4px 24px rgba(0,0,0,.10),0 0 0 1px rgba(0,0,0,.05);
+}
+body{font-family:var(--f);background:var(--g1);color:var(--ink);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);height:52px;display:flex;align-items:center;padding:0 32px;justify-content:space-between}
+.logo{font-size:17px;font-weight:800;letter-spacing:-.03em;color:var(--ink);text-decoration:none}
+.nav-tabs{display:flex;gap:2px}
+.tab{font-size:13px;color:var(--ink3);background:none;border:none;padding:6px 14px;border-radius:var(--r);cursor:pointer;font-family:var(--f);transition:color .15s,background .15s}
+.tab:hover{color:var(--ink);background:var(--g1)}
+.tab.on{color:var(--ink);background:var(--g1);font-weight:500}
+.pill-g{background:var(--gd);color:var(--green);border:1px solid rgba(48,164,108,.2);border-radius:100px;padding:2px 9px;font-family:var(--mono);font-size:10px}
+.pill-gy{background:var(--g2);color:var(--ink4);border:1px solid var(--b1);border-radius:100px;padding:2px 9px;font-family:var(--mono);font-size:10px}
+.btn-dk{font-size:13px;font-weight:600;color:#fff;background:var(--ink);padding:7px 18px;border-radius:100px;text-decoration:none;transition:opacity .15s;border:none;cursor:pointer;font-family:var(--f)}
+.btn-dk:hover{opacity:.78}
+main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
+.card{background:var(--w);border:1px solid var(--b1);border-radius:var(--r4);overflow:hidden;box-shadow:var(--sh)}
+.view{display:none}.view.on{display:block}
+/* BROWSE */
+.filter-bar{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding:14px 18px;background:var(--w);border:1px solid var(--b1);border-radius:var(--r3);box-shadow:var(--sh)}
+.fl-l{font-size:13px;font-weight:500;color:var(--ink2)}
+.fl-v{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);min-width:32px}
+input[type=range]{flex:1;max-width:200px}
+.trader-list{display:flex;flex-direction:column;gap:8px}
+.tr-row{background:var(--w);border:1px solid var(--b1);border-radius:var(--r3);cursor:pointer;transition:box-shadow .15s,transform .15s;overflow:hidden;display:block;text-decoration:none;color:inherit}
+.tr-row:hover{box-shadow:var(--sh2);transform:translateY(-1px)}
+.tr-inner{display:grid;grid-template-columns:36px 1fr 130px 90px 90px 100px 160px;gap:16px;padding:16px 20px;align-items:center}
+.tr-num{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink4)}
+.tr-num.g1{color:var(--amber)}
+.tr-id{display:flex;align-items:center;gap:10px}
+.tr-av{width:36px;height:36px;border-radius:var(--r2);background:var(--g2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ink3);flex-shrink:0}
+.tr-av.gld{background:#FFF3CD;color:#8B6508;border-color:rgba(180,83,9,.2)}
+.tr-nm{font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.tr-meta{font-family:var(--mono);font-size:10px;color:var(--ink4);margin-top:1px}
+.tr-rr-wrap{display:flex;flex-direction:column;gap:4px}
+.tr-rr-v{font-size:20px;font-weight:700;letter-spacing:-.03em;color:var(--green)}
+.tr-rr-bar{height:3px;background:var(--g2);border-radius:2px;width:90%}
+.tr-rr-fill{height:100%;border-radius:2px;background:var(--green)}
+.tr-stat{font-size:13px;font-weight:500;color:var(--ink)}
+.tr-stat small{font-family:var(--mono);font-size:9px;color:var(--ink4);display:block;text-transform:uppercase;letter-spacing:.08em;margin-top:1px}
+.tr-inc{font-size:14px;font-weight:700;color:var(--green)}
+.tr-inc small{font-family:var(--mono);font-size:9px;color:var(--ink4);display:block;letter-spacing:.06em;margin-top:1px}
+.btn-sub{font-size:13px;font-weight:600;color:#fff;background:var(--ink);border:none;border-radius:100px;padding:9px 18px;cursor:pointer;font-family:var(--f);transition:opacity .15s}
+.btn-sub:hover{opacity:.78}
+/* CHECKOUT */
+.co-wrap{max-width:500px;margin:40px auto}
+.co-back{background:none;border:none;cursor:pointer;font-size:13px;color:var(--ink3);font-family:var(--f);padding:0;margin-bottom:20px;display:flex;align-items:center;gap:4px}
+.co-card{background:var(--w);border-radius:var(--r4);box-shadow:var(--sh2);overflow:hidden}
+.co-h{padding:18px 22px;border-bottom:1px solid var(--b1)}
+.co-title{font-size:17px;font-weight:700;letter-spacing:-.025em;color:var(--ink);margin-bottom:4px}
+.co-sub{font-size:13px;font-weight:300;color:var(--ink3)}
+.co-body{padding:22px}
+.co-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.co-stat{background:var(--g1);border-radius:var(--r2);padding:12px 14px}
+.cos-l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px}
+.cos-v{font-size:20px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.cos-v.g{color:var(--green)}
+.co-price-row{display:flex;align-items:baseline;gap:4px;margin-bottom:4px}
+.co-price{font-size:36px;font-weight:700;letter-spacing:-.04em;color:var(--ink)}
+.co-per{font-size:16px;font-weight:300;color:var(--ink4)}
+.co-subs{font-family:var(--mono);font-size:10px;color:var(--ink4);margin-bottom:20px;letter-spacing:.04em}
+.co-subs span{color:var(--ink2);font-weight:500}
+.btn-stripe{display:block;width:100%;text-align:center;background:var(--ink);color:#fff;font-size:16px;font-weight:600;padding:14px;border-radius:var(--r3);text-decoration:none;margin-bottom:12px;cursor:pointer;border:none;font-family:var(--f);transition:opacity .15s}
+.btn-stripe:hover{opacity:.8}
+.co-trust{font-size:12px;font-weight:300;color:var(--ink4);text-align:center;line-height:1.6}
+.co-trust strong{font-weight:500;color:var(--ink3)}
+.co-div{height:1px;background:var(--b1);margin:16px 0}
+.co-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3);font-weight:300;margin-bottom:8px}
+.co-ck{width:18px;height:18px;border-radius:50%;background:var(--gd);border:1px solid rgba(48,164,108,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+/* SUCCESS */
+.sub-success{max-width:480px;margin:60px auto;background:var(--w);border-radius:var(--r4);box-shadow:var(--sh2);padding:48px;text-align:center}
+/* MY SUBS */
+.my-sub-row{background:var(--w);border:1px solid var(--b1);border-radius:var(--r3);margin-bottom:8px}
+.ms-inner{display:grid;grid-template-columns:1fr 100px 100px 160px;gap:16px;padding:16px 20px;align-items:center}
+.ms-btns{display:flex;gap:8px}
+.btn-view{font-size:13px;font-weight:400;color:var(--blue);background:none;border:1px solid rgba(0,113,227,.2);border-radius:100px;padding:7px 14px;cursor:pointer;font-family:var(--f)}
+.btn-cancel{font-size:13px;color:var(--red);background:none;border:none;cursor:pointer;font-family:var(--f)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">TRDR</a>
+  <div class="nav-tabs">
+    <button class="tab on" onclick="showTab('browse')">Browse Traders</button>
+    <button class="tab" onclick="showTab('mysubs')">My Subscriptions</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span class="pill-gy">Subscriber</span>
+    <a href="index.html" class="btn-dk" style="font-size:13px;font-weight:400;background:none;border:1px solid var(--b2);color:var(--ink3)">← Back to site</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- BROWSE VIEW -->
+<div class="view on" id="view-browse">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+    <div>
+      <h1 style="font-size:26px;font-weight:700;letter-spacing:-.035em;margin-bottom:4px">Top Traders</h1>
+      <p style="font-size:13px;color:var(--ink3)">Ranked by Recovery Rate. All data locked and verified.</p>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <span class="fl-l">Min Recovery Rate</span>
+    <input type="range" min="0" max="90" step="5" value="0" id="rr-filter" oninput="filterTraders()">
+    <span class="fl-v" id="rr-filter-val">0%</span>
+    <span style="margin-left:auto;font-size:13px;color:var(--ink4)" id="filter-count">Showing 6 traders</span>
+  </div>
+  <div class="trader-list" id="trader-list"></div>
+</div>
+
+<!-- CHECKOUT VIEW -->
+<div class="view" id="view-checkout">
+  <div class="co-wrap">
+    <button class="co-back" onclick="showTab('browse')">← Back to traders</button>
+    <div class="co-card" id="co-card"></div>
+  </div>
+</div>
+
+<!-- SUCCESS VIEW -->
+<div class="view" id="view-success">
+  <div class="sub-success">
+    <div style="width:52px;height:52px;border-radius:50%;background:var(--gd);border:1px solid rgba(48,164,108,.25);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:24px">✓</div>
+    <h2 style="font-size:22px;font-weight:700;letter-spacing:-.03em;margin-bottom:8px" id="suc-h">Subscribed!</h2>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px" id="suc-p">You'll receive all new trades as they're published.</p>
+    <div style="background:var(--gd);border:1px solid rgba(48,164,108,.2);border-radius:var(--r2);padding:13px 16px;margin-bottom:24px;font-size:13px;color:var(--green)">
+      You're subscribing to <strong>real performance</strong> — not signals, not content. Every trade is locked and real.
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button onclick="showTab('mysubs')" class="btn-dk">My subscriptions</button>
+      <button onclick="showTab('browse')" style="padding:10px 20px;background:var(--g1);border:1px solid var(--b1);border-radius:100px;cursor:pointer;font-size:14px;font-weight:500;color:var(--ink3);font-family:var(--f)">Browse more</button>
+    </div>
+  </div>
+</div>
+
+<!-- MY SUBS VIEW -->
+<div class="view" id="view-mysubs">
+  <div style="margin-bottom:24px">
+    <h1 style="font-size:26px;font-weight:700;letter-spacing:-.035em;margin-bottom:4px">My Subscriptions</h1>
+    <p style="font-size:13px;color:var(--ink3)">You follow <span id="subs-count">2</span> traders. Next billing: Jun 1.</p>
+  </div>
+  <div id="my-subs-list"></div>
+  <button onclick="showTab('browse')" class="btn-dk" style="margin-top:12px">+ Add trader</button>
+</div>
+
+</main>
+
+<script>
+const TRADERS=[
+  {id:1,name:'M. Reyes',init:'MR',trades:47,rr:94.2,rank:1,subs:1240,income:24800,wr:62.1,rrav:2.7,gold:true},
+  {id:2,name:'K. Laurent',init:'KL',trades:29,rr:91.4,rank:2,subs:870,income:17400,wr:58.6,rrav:2.4,gold:false},
+  {id:3,name:'S. Rousseau',init:'SR',trades:18,rr:88.9,rank:3,subs:612,income:12200,wr:72.2,rrav:2.0,gold:false},
+  {id:4,name:'A. Tanaka',init:'AT',trades:63,rr:86.3,rank:4,subs:441,income:8820,wr:54.0,rrav:2.6,gold:false},
+  {id:5,name:'D. Khoury',init:'DK',trades:41,rr:83.7,rank:5,subs:298,income:5960,wr:48.8,rrav:2.5,gold:false},
+  {id:6,name:'L. Park',init:'LP',trades:22,rr:80.1,rank:6,subs:187,income:3740,wr:55.0,rrav:2.2,gold:false},
+];
+let mySubscriptions=[TRADERS[0],TRADERS[1]];
+let checkoutTrader=null;
+
+function showTab(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('view-'+name).classList.add('on');
+  const idx={browse:0,mysubs:1}[name];
+  if(idx!==undefined)document.querySelectorAll('.tab')[idx].classList.add('on');
+  if(name==='browse')renderTraders();
+  if(name==='mysubs')renderMySubs();
+}
+
+function filterTraders(){
+  const v=document.getElementById('rr-filter').value;
+  document.getElementById('rr-filter-val').textContent=v+'%';
+  renderTraders();
+}
+
+function renderTraders(){
+  const min=parseInt(document.getElementById('rr-filter').value)||0;
+  const filtered=TRADERS.filter(t=>t.rr>=min);
+  document.getElementById('filter-count').textContent='Showing '+filtered.length+' traders';
+  document.getElementById('trader-list').innerHTML=filtered.map(t=>`
+    <div class="tr-row" onclick="openProfile(${t.id})">
+      <div class="tr-inner">
+        <div class="tr-num${t.rank===1?' g1':''}">#${t.rank}</div>
+        <div class="tr-id">
+          <div class="tr-av${t.gold?' gld':''}">${t.init}</div>
+          <div><div class="tr-nm">${t.name}</div><div class="tr-meta">${t.trades} locked · 0 edits</div></div>
+        </div>
+        <div class="tr-rr-wrap">
+          <div class="tr-rr-v">${t.rr}%</div>
+          <div class="tr-rr-bar"><div class="tr-rr-fill" style="width:${t.rr}%"></div></div>
+        </div>
+        <div class="tr-stat">${t.wr}%<small>Win rate</small></div>
+        <div class="tr-stat">1:${t.rrav}<small>Avg R/R</small></div>
+        <div class="tr-inc">$${(t.income/1000).toFixed(1)}K/mo<small>${t.subs.toLocaleString()} subscribers</small></div>
+        <button class="btn-sub" onclick="event.stopPropagation();openCheckout(${t.id})">Subscribe $20/mo</button>
+      </div>
+    </div>`).join('');
+}
+
+function openProfile(id){
+  window.location.href='profile.html';
+}
+
+function openCheckout(id){
+  checkoutTrader=TRADERS.find(t=>t.id===id);
+  const t=checkoutTrader;
+  document.getElementById('co-card').innerHTML=`
+    <div class="co-h"><div class="co-title">Subscribe to ${t.name}</div><div class="co-sub">Receive real trades as they're published. Every trade locked on entry.</div></div>
+    <div class="co-body">
+      <div class="co-stats">
+        <div class="co-stat"><div class="cos-l">Recovery Rate</div><div class="cos-v g">${t.rr}%</div></div>
+        <div class="co-stat"><div class="cos-l">Rank</div><div class="cos-v">#${t.rank}</div></div>
+        <div class="co-stat"><div class="cos-l">Win Rate</div><div class="cos-v">${t.wr}%</div></div>
+        <div class="co-stat"><div class="cos-l">Avg R/R</div><div class="cos-v">1:${t.rrav}</div></div>
+      </div>
+      <div class="co-price-row"><span class="co-price">$20</span><span class="co-per">/month</span></div>
+      <div class="co-subs"><span>${t.subs.toLocaleString()} subscribers</span> · Cancel anytime</div>
+      <button class="btn-stripe" onclick="doSubscribe(${t.id})">Pay with Stripe →</button>
+      <div class="co-trust">You are subscribing to <strong>real performance</strong> — not signals, not content.</div>
+      <div class="co-div"></div>
+      <div class="co-item"><div class="co-ck" style="font-size:9px;color:var(--green)">✓</div>Trade published before outcome — always</div>
+      <div class="co-item"><div class="co-ck" style="font-size:9px;color:var(--green)">✓</div>Entry, Stop Loss, Take Profit always visible</div>
+      <div class="co-item"><div class="co-ck" style="font-size:9px;color:var(--green)">✓</div>Full trade history always public</div>
+      <div class="co-item"><div class="co-ck" style="font-size:9px;color:var(--green)">✓</div>This is not copy trading</div>
+    </div>`;
+  showTab('checkout');
+}
+
+function doSubscribe(id){
+  const t=TRADERS.find(x=>x.id===id);
+  if(!mySubscriptions.find(x=>x.id===id))mySubscriptions.push(t);
+  document.getElementById('subs-count').textContent=mySubscriptions.length;
+  document.getElementById('suc-h').textContent='Subscribed to '+t.name;
+  document.getElementById('suc-p').textContent="You'll receive all new trades from "+t.name+" as they're published.";
+  showTab('success');
+}
+
+function renderMySubs(){
+  document.getElementById('subs-count').textContent=mySubscriptions.length;
+  document.getElementById('my-subs-list').innerHTML=mySubscriptions.map(t=>`
+    <div class="my-sub-row">
+      <div class="ms-inner">
+        <div class="tr-id">
+          <div class="tr-av${t.gold?' gld':''}">${t.init}</div>
+          <div><div class="tr-nm">${t.name}</div><div class="tr-meta">Rank #${t.rank} · ${t.trades} trades · ${t.rr}% Recovery Rate</div></div>
+        </div>
+        <div class="tr-stat">${t.rr}%<small>Recovery</small></div>
+        <div><span class="pill-g">Active</span><div style="font-size:11px;color:var(--ink4);margin-top:4px">$20/month</div></div>
+        <div class="ms-btns">
+          <button class="btn-view" onclick="openProfile(${t.id})">View trades</button>
+          <button class="btn-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+renderTraders();
+</script>
+</body>
+</html>
