@@ -7,23 +7,24 @@
 <meta name="description" content="Rank traders by Recovery Rate. Real trades, locked forever.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 :root{
-  --w:#fff;--g1:#F5F5F7;--g2:#E8E8ED;
+  --w:#fff;--g1:#F5F5F7;--g2:#E8E8ED;--g3:#D2D2D7;
   --ink:#1D1D1F;--ink2:#424245;--ink3:#6E6E73;--ink4:#86868B;
   --blue:#0071E3;--green:#30A46C;--gd:rgba(48,164,108,.10);
   --red:#D93025;--rd:rgba(217,48,37,.10);--amber:#B45309;--ad:rgba(180,83,9,.08);
   --b1:rgba(0,0,0,.06);--b2:rgba(0,0,0,.10);
-  --f:'Figtree',sans-serif;--mono:'JetBrains Mono',monospace;
+  --f:'Figtree',sans-serif;--mono:'JetBrains Mono',monospace;--hand:'Caveat',cursive;
   --r:8px;--r2:12px;--r3:18px;--r4:24px;
   --sh:0 2px 8px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.04);
   --sh2:0 4px 24px rgba(0,0,0,.10),0 0 0 1px rgba(0,0,0,.05);
 }
-body{font-family:var(--f);background:var(--w);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:var(--f);background:var(--w);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
+/* NAV */
 nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--b1);height:52px;display:flex;align-items:center;padding:0 32px;justify-content:space-between}
 .logo{font-size:18px;font-weight:800;letter-spacing:-.03em;color:var(--ink);text-decoration:none}
 .nav-links{display:flex;gap:2px;list-style:none}
@@ -35,10 +36,12 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.88);backdrop-
 .btn-dk{font-size:13px;font-weight:600;color:#fff;background:var(--ink);padding:7px 18px;border-radius:100px;text-decoration:none;transition:opacity .15s}
 .btn-dk:hover{opacity:.78}
 
+/* LAYOUT */
 .w{max-width:980px;margin:0 auto;padding:0 32px}
-.ww{max-width:1160px;margin:0 auto;padding:0 32px}
+.ww{max-width:1200px;margin:0 auto;padding:0 32px}
 section{border-bottom:1px solid var(--b1)}
 
+/* SHARED */
 .ey{font-size:13px;font-weight:500;color:var(--blue);letter-spacing:-.01em;margin-bottom:10px;display:block}
 .sh{font-size:clamp(34px,4.5vw,54px);font-weight:700;letter-spacing:-.04em;line-height:1.07;color:var(--ink);margin-bottom:16px}
 .sh em{font-style:italic;font-weight:300;color:var(--ink3)}
@@ -48,26 +51,245 @@ section{border-bottom:1px solid var(--b1)}
 .btn-lg:hover{opacity:.78}
 .btn-lo{font-size:17px;font-weight:400;color:var(--ink2);background:var(--w);border:1px solid var(--b2);padding:14px 28px;border-radius:100px;text-decoration:none;transition:border-color .15s}
 .btn-lo:hover{border-color:rgba(0,0,0,.2)}
-
-/* HERO */
-.hero{padding:108px 0 96px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:900px;height:600px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,113,227,.05) 0%,transparent 65%);pointer-events:none}
-.h-tag{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--ink3);background:var(--g1);border:1px solid var(--b1);border-radius:100px;padding:5px 14px;margin-bottom:28px}
-.h-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
-.hero h1{font-size:clamp(46px,7.5vw,84px);font-weight:700;line-height:1.04;letter-spacing:-.045em;color:var(--ink);margin-bottom:22px}
-.hero h1 em{font-style:italic;font-weight:300;color:var(--ink3)}
-.h-sub{font-size:clamp(18px,2.2vw,22px);font-weight:300;color:var(--ink3);max-width:580px;margin:0 auto 14px;line-height:1.6;letter-spacing:-.01em}
-.h-trust{font-size:13px;color:var(--ink4);margin-bottom:40px;letter-spacing:.01em}
-.h-btns{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:72px}
-.stats-strip{display:inline-flex;align-items:stretch;background:var(--w);border:1px solid var(--b1);border-radius:var(--r4);box-shadow:var(--sh);overflow:hidden}
-.hst{padding:18px 28px;border-right:1px solid var(--b1);text-align:center}
-.hst:last-child{border-right:none}
-.hst-v{font-size:26px;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:4px}
-.hst-v.g{color:var(--green)}
-.hst-l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes floatR{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-/* HOW */
+/* ══════════════════════════════════════
+   HERO — THREE COLUMN LAYOUT
+══════════════════════════════════════ */
+.hero{
+  padding:60px 0 0;
+  position:relative;overflow:hidden;
+  min-height:600px;
+  background:linear-gradient(180deg,#FAFAFA 0%,#fff 100%);
+}
+.hero-grid{
+  max-width:1280px;margin:0 auto;padding:0 24px;
+  display:grid;
+  grid-template-columns:300px 1fr 320px;
+  gap:0;
+  align-items:center;
+  min-height:560px;
+}
+
+/* ─── LEFT: FAKE WORLD ─── */
+.hero-left{
+  position:relative;
+  height:520px;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-right:24px;
+}
+.fake-cards{position:relative;width:260px;height:480px}
+/* Each fake telegram card */
+.fk-card{
+  position:absolute;
+  background:var(--w);
+  border:1px solid var(--b1);
+  border-radius:var(--r3);
+  padding:14px 16px;
+  box-shadow:0 2px 16px rgba(0,0,0,.07),0 0 0 1px rgba(0,0,0,.04);
+  width:200px;
+  animation:float 6s ease-in-out infinite;
+}
+.fk-card:nth-child(2){animation-delay:.8s;animation-duration:7s}
+.fk-card:nth-child(3){animation-delay:1.6s;animation-duration:5.5s}
+.fk-card:nth-child(4){animation-delay:2.4s}
+.fk-card:nth-child(5){animation-delay:3s;animation-duration:6.5s}
+
+.fk-card.c1{top:0;left:20px}
+.fk-card.c2{top:80px;left:50px}
+.fk-card.c3{top:180px;left:10px}
+.fk-card.c4{top:295px;left:40px}
+.fk-card.c5{top:390px;left:15px}
+
+/* Blur / fade cards on edges */
+.fk-card.c1,.fk-card.c5{opacity:.55;filter:blur(.5px)}
+.fk-card.c4{opacity:.75}
+
+.fk-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.fk-av{width:28px;height:28px;border-radius:50%;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.fk-name{font-size:12px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.fk-subs{font-size:10px;color:var(--ink4)}
+.fk-verify{font-size:10px;color:var(--blue)}
+.fk-body{font-size:12px;color:var(--ink2);line-height:1.55;margin-bottom:10px}
+.fk-body .highlight{color:var(--red);font-weight:700}
+.fk-body .highlight-g{color:var(--green);font-weight:700}
+.fk-btn{display:block;text-align:center;background:var(--g1);border:1px solid var(--b1);border-radius:var(--r);padding:6px;font-size:11px;font-weight:500;color:var(--ink2);text-decoration:none;letter-spacing:.02em}
+.fk-signal{font-family:var(--mono);font-size:10px;line-height:2;color:var(--ink2)}
+.fk-signal .lbl{color:var(--ink4)}
+.fk-signal .vip{color:var(--red);font-weight:700;font-size:11px}
+
+/* Handwritten annotations */
+.anno{
+  position:absolute;
+  font-family:var(--hand);
+  font-size:16px;
+  color:rgba(217,48,37,.55);
+  white-space:nowrap;
+  pointer-events:none;
+}
+.anno-arrow{font-size:18px}
+.anno.a1{top:55px;left:168px;transform:rotate(-4deg)}
+.anno.a2{top:170px;left:150px;transform:rotate(3deg)}
+.anno.a3{top:275px;left:152px;transform:rotate(-5deg)}
+.anno.a4{top:380px;left:140px;transform:rotate(2deg)}
+
+/* ─── CENTER: HEADLINE ─── */
+.hero-center{
+  padding:0 40px;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+}
+.h-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:500;color:var(--ink3);
+  background:var(--g1);border:1px solid var(--b1);
+  border-radius:100px;padding:5px 14px;
+  margin-bottom:28px;letter-spacing:-.01em;
+}
+.h-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+.hero-h1{
+  font-size:clamp(40px,5.5vw,66px);
+  font-weight:800;line-height:1.04;
+  letter-spacing:-.045em;color:var(--ink);
+  margin-bottom:6px;
+  max-width:480px;
+}
+.hero-h1 em{
+  font-style:italic;font-weight:300;color:var(--ink3);
+  font-size:clamp(36px,5vw,60px);
+}
+.h-sub{
+  font-size:16px;font-weight:300;color:var(--ink3);
+  max-width:380px;margin:0 auto 10px;
+  line-height:1.65;letter-spacing:-.01em;
+}
+.h-trust{
+  font-size:12px;color:var(--ink4);
+  margin-bottom:32px;letter-spacing:.01em;
+}
+.h-btns{
+  display:flex;align-items:center;justify-content:center;
+  gap:10px;margin-bottom:40px;
+}
+/* Stats strip */
+.stats-strip{
+  display:inline-flex;align-items:stretch;
+  background:var(--w);border:1px solid var(--b1);
+  border-radius:var(--r4);box-shadow:var(--sh);overflow:hidden;
+}
+.hst{padding:14px 20px;border-right:1px solid var(--b1);text-align:center}
+.hst:last-child{border-right:none}
+.hst-v{font-size:22px;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:3px}
+.hst-v.g{color:var(--blue)}
+.hst-l{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+
+/* ─── RIGHT: REAL DATA ─── */
+.hero-right{
+  position:relative;
+  height:520px;
+  display:flex;align-items:center;
+  padding-left:16px;
+}
+.real-cards{position:relative;width:300px;height:480px}
+
+/* Recovery rate circle card */
+.rr-circle-card{
+  position:absolute;top:0;right:0;
+  background:var(--w);border:1px solid var(--b1);border-radius:var(--r3);
+  padding:16px 20px;box-shadow:var(--sh2);
+  text-align:center;width:140px;
+  animation:floatR 7s ease-in-out infinite;
+}
+.rr-c-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin-bottom:10px}
+.rr-circle{
+  width:72px;height:72px;border-radius:50%;
+  border:3px solid var(--g2);
+  margin:0 auto 6px;
+  position:relative;display:flex;align-items:center;justify-content:center;
+  background:conic-gradient(var(--blue) 0deg 339deg,var(--g2) 339deg 360deg);
+}
+.rr-circle-inner{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--w);
+  display:flex;align-items:center;justify-content:center;
+  position:absolute;
+}
+.rr-circle-val{font-size:16px;font-weight:700;letter-spacing:-.03em;color:var(--blue)}
+.rr-c-sub{font-size:10px;color:var(--ink4)}
+
+/* Chart card */
+.chart-card{
+  position:absolute;top:60px;left:0;right:0;
+  background:var(--w);border:1px solid var(--b1);border-radius:var(--r3);
+  overflow:hidden;box-shadow:var(--sh);
+  animation:floatR 8s ease-in-out infinite;animation-delay:.5s;
+}
+.chart-card-h{
+  padding:10px 14px;border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--g1);
+}
+.cc-lbl{font-size:12px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.cc-val{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--green)}
+.chart-area{padding:10px 14px 8px;height:110px}
+
+/* Annotations on right side */
+.anno-r{
+  position:absolute;
+  font-family:var(--hand);
+  font-size:15px;
+  color:rgba(0,113,227,.5);
+  white-space:nowrap;
+  pointer-events:none;
+}
+.anno-r.r1{right:10px;top:192px}
+.anno-r.r2{right:20px;top:242px}
+.anno-r.r3{right:25px;top:292px}
+.anno-r.r4{right:10px;top:342px}
+.anno-r.r5{right:18px;top:390px}
+
+/* Real Traders card */
+.real-card{
+  position:absolute;bottom:50px;left:0;
+  background:var(--w);border:1px solid var(--b1);border-radius:var(--r3);
+  padding:14px 18px;box-shadow:var(--sh2);width:180px;
+  animation:floatR 6s ease-in-out infinite;animation-delay:1.2s;
+}
+.rc-title{font-size:12px;font-weight:700;letter-spacing:-.01em;color:var(--ink);margin-bottom:8px}
+.rc-item{font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:6px;margin-bottom:5px;line-height:1.4}
+.rc-item:last-child{margin-bottom:0}
+.rc-check{width:14px;height:14px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rc-check::after{content:'';width:3px;height:6px;border-right:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(40deg) translateY(-1px);display:block}
+
+/* Process card */
+.proc-card{
+  position:absolute;bottom:0;right:0;
+  background:var(--w);border:1px solid var(--b1);border-radius:var(--r3);
+  padding:12px 16px;box-shadow:var(--sh);width:160px;
+  animation:floatR 7.5s ease-in-out infinite;animation-delay:2s;
+}
+.pc-title{font-size:11px;font-weight:700;letter-spacing:-.01em;color:var(--ink);margin-bottom:7px}
+.pc-item{font-size:10px;color:var(--ink3);display:flex;align-items:center;gap:5px;margin-bottom:4px;line-height:1.4}
+.pc-item:last-child{margin-bottom:0}
+.pc-ck{color:var(--blue);font-size:11px;flex-shrink:0}
+
+/* Divider line between left and center */
+.hero-divider-l{
+  position:absolute;top:0;bottom:0;
+  left:300px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--b1) 20%,var(--b1) 80%,transparent);
+  pointer-events:none;
+}
+.hero-divider-r{
+  position:absolute;top:0;bottom:0;
+  right:320px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--b1) 20%,var(--b1) 80%,transparent);
+  pointer-events:none;
+}
+
+/* HOW GRID */
 .how{background:var(--g1);padding:96px 0}
 .how-hdr{text-align:center;margin-bottom:56px}
 .steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:var(--b1);border-radius:var(--r4);overflow:hidden;box-shadow:var(--sh)}
@@ -169,6 +391,27 @@ section{border-bottom:1px solid var(--b1)}
 .tc-btn:hover{background:var(--ink);border-color:var(--ink);color:#fff}
 .tcard.top .tc-btn{background:var(--ink);border-color:var(--ink);color:#fff}
 
+/* LEADERBOARD TABLE */
+.lb-wrap{margin-top:20px;background:var(--w);border:1px solid var(--b1);border-radius:var(--r3);overflow:hidden;box-shadow:var(--sh)}
+.lb-hd{display:grid;grid-template-columns:36px 1fr 110px 90px 90px 130px;gap:0;padding:10px 20px;border-bottom:1px solid var(--b1);background:var(--g1)}
+.lbh{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+.lbh.r{text-align:right}
+.lb-row{display:grid;grid-template-columns:36px 1fr 110px 90px 90px 130px;gap:0;padding:13px 20px;border-bottom:1px solid var(--b1);align-items:center;transition:background .1s;cursor:default;text-decoration:none;color:inherit;display:grid}
+a.lb-row:hover{background:var(--g1)}
+.lb-row:last-child{border-bottom:none}
+.lb-n{font-family:var(--mono);font-size:12px;color:var(--ink4)}
+.lb-n.am{color:var(--amber);font-weight:600}
+.lb-tc{display:flex;align-items:center;gap:8px}
+.lb-av{width:28px;height:28px;border-radius:var(--r);background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--ink3)}
+.lb-av.gld{background:#FFF3CD;color:#8B6508}
+.lb-nm{font-size:13px;font-weight:500;color:var(--ink)}
+.lb-td{font-family:var(--mono);font-size:10px;color:var(--ink4)}
+.lb-rr{font-size:14px;font-weight:600;color:var(--green);text-align:right}
+.lb-wr{font-size:13px;font-weight:500;color:var(--ink);text-align:right}
+.lb-subs-cell{text-align:right}
+.lb-sv{font-size:13px;font-weight:600;color:var(--ink)}
+.lb-il{font-size:11px;color:var(--green)}
+
 /* TRANSPARENCY */
 .tp-g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:48px}
 .tp-c{background:var(--g1);border:1px solid var(--b1);border-radius:var(--r4);padding:36px 28px;transition:box-shadow .2s}
@@ -217,23 +460,178 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="w">
-    <div class="h-tag fade">Live · Forex &amp; Metals · Recovery Rate System</div>
-    <h1 class="f1">Most traders show profit.<br><em>We show recovery.</em></h1>
-    <p class="h-sub f2">Rank traders by how they recover from losses — not by screenshots, not by promises.</p>
-    <p class="h-trust f2">No edits.&nbsp;&nbsp;·&nbsp;&nbsp;No deleted trades.&nbsp;&nbsp;·&nbsp;&nbsp;Full transparency.</p>
-    <div class="h-btns f3">
-      <a href="#traders" class="btn-lg">Explore traders</a>
-      <a href="#how" class="btn-lo">How it works →</a>
+  <div class="hero-grid">
+
+    <!-- LEFT: FAKE WORLD -->
+    <div class="hero-left">
+      <div class="fake-cards">
+
+        <!-- Card 1: Forex Insider -->
+        <div class="fk-card c1">
+          <div class="fk-head">
+            <div class="fk-av" style="background:#EEF2FF;font-size:16px">📢</div>
+            <div>
+              <div class="fk-name">Forex Insider <span class="fk-verify">✓</span></div>
+              <div class="fk-subs">128K subscribers</div>
+            </div>
+          </div>
+          <div class="fk-body">My students made <span class="highlight">$27,392</span> this week 🔥<br>You can be next.<br>Join now 👇</div>
+          <a class="fk-btn">JOIN CHANNEL</a>
+        </div>
+
+        <!-- Card 2: Millionaire Club -->
+        <div class="fk-card c2">
+          <div class="fk-head">
+            <div class="fk-av" style="background:#FFF7ED;font-size:16px">💰</div>
+            <div>
+              <div class="fk-name">Millionaire Forex Club <span class="fk-verify">✓</span></div>
+              <div class="fk-subs">68K subscribers</div>
+            </div>
+          </div>
+          <div class="fk-body">Turn $500 into <span class="highlight">$50,000</span> with my secret strategy.<br>100% works.</div>
+          <a class="fk-btn">JOIN CHANNEL</a>
+        </div>
+
+        <!-- Card 3: Signals King -->
+        <div class="fk-card c3">
+          <div class="fk-head">
+            <div class="fk-av" style="background:#F0FDF4;font-size:16px">👑</div>
+            <div>
+              <div class="fk-name">Signals King</div>
+              <div class="fk-subs">200K subscribers</div>
+            </div>
+          </div>
+          <div class="fk-body">
+            <div class="fk-signal">
+              <div class="vip">🔴 VIP SIGNAL</div>
+              <div><span class="lbl">Pair: </span>EURUSD BUY NOW</div>
+              <div><span class="lbl">TP1: </span>1.0830</div>
+              <div><span class="lbl">SL:  </span>1.0710</div>
+              <div><span class="lbl">DM for access 🚀</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: FX Guru -->
+        <div class="fk-card c4">
+          <div class="fk-head">
+            <div class="fk-av" style="background:#FEF3C7;font-size:16px">⚡</div>
+            <div>
+              <div class="fk-name">FX Guru</div>
+              <div class="fk-subs">42K subscribers</div>
+            </div>
+          </div>
+          <div class="fk-body">I made $1.2M last year trading from my phone.<br>This is the only strategy you need.</div>
+          <a class="fk-btn">JOIN CHANNEL</a>
+        </div>
+
+        <!-- Card 5: Forex Lifestyle -->
+        <div class="fk-card c5">
+          <div class="fk-head">
+            <div class="fk-av" style="background:#FFF1F2;font-size:16px">🏖</div>
+            <div>
+              <div class="fk-name">Forex Lifestyle <span class="fk-verify">✓</span></div>
+              <div class="fk-subs">89K subscribers</div>
+            </div>
+          </div>
+          <div class="fk-body">I quit my job.<br>Now I make <span class="highlight-g">$10K+/month</span> trading 1 hour a day. You can too.</div>
+          <a class="fk-btn">JOIN CHANNEL</a>
+        </div>
+
+        <!-- Annotations -->
+        <div class="anno a1">Get rich quick ↙</div>
+        <div class="anno a2">Secret strategy ↙</div>
+        <div class="anno a3">No risk ↙</div>
+        <div class="anno a4">Guaranteed profits ↙</div>
+      </div>
     </div>
-    <div class="stats-strip f3">
-      <div class="hst"><div class="hst-v">214</div><div class="hst-l">Ranked traders</div></div>
-      <div class="hst"><div class="hst-v">4,831</div><div class="hst-l">Locked trades</div></div>
-      <div class="hst"><div class="hst-v g">94.2%</div><div class="hst-l">Top recovery</div></div>
-      <div class="hst"><div class="hst-v g">0</div><div class="hst-l">Edits ever made</div></div>
+
+    <!-- CENTER: HEADLINE -->
+    <div class="hero-center">
+      <div class="h-tag">Live · Forex &amp; Metals · Recovery Rate System</div>
+      <h1 class="hero-h1">
+        Most traders show profit.<br>
+        <em>We show recovery.</em>
+      </h1>
+      <p class="h-sub">Rank traders by how they recover from losses — not by screenshots, not by promises.</p>
+      <p class="h-trust">No edits.&nbsp;&nbsp;·&nbsp;&nbsp;No deleted trades.&nbsp;&nbsp;·&nbsp;&nbsp;Full transparency.</p>
+      <div class="h-btns">
+        <a href="#traders" class="btn-lg">Explore traders</a>
+        <a href="#how" class="btn-lo">How it works →</a>
+      </div>
+      <div class="stats-strip">
+        <div class="hst"><div class="hst-v">214</div><div class="hst-l">Ranked traders</div></div>
+        <div class="hst"><div class="hst-v">4,831</div><div class="hst-l">Locked trades</div></div>
+        <div class="hst"><div class="hst-v g">94.2%</div><div class="hst-l">Top recovery</div></div>
+        <div class="hst"><div class="hst-v g">0</div><div class="hst-l">Edits ever</div></div>
+      </div>
     </div>
+
+    <!-- RIGHT: REAL DATA -->
+    <div class="hero-right">
+      <div class="real-cards">
+
+        <!-- Recovery Rate Circle -->
+        <div class="rr-circle-card">
+          <div class="rr-c-lbl">Recovery Rate</div>
+          <div class="rr-circle">
+            <div class="rr-circle-inner">
+              <div class="rr-circle-val">94.2%</div>
+            </div>
+          </div>
+          <div class="rr-c-sub">Top 10%</div>
+        </div>
+
+        <!-- Recovery Chart -->
+        <div class="chart-card">
+          <div class="chart-card-h">
+            <span class="cc-lbl">Recovery curve</span>
+            <span class="cc-val">+31.96R</span>
+          </div>
+          <div class="chart-area">
+            <svg width="100%" height="100%" viewBox="0 0 260 90" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgba(0,113,227,0.12)"/>
+                  <stop offset="100%" stop-color="rgba(0,113,227,0)"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,80 L22,74 L44,68 L55,72 L66,62 L88,52 L99,58 L110,46 L132,36 L143,42 L154,30 L176,20 L187,26 L198,14 L220,6 L231,10 L242,4 L260,2 L260,90 L0,90Z" fill="url(#cg)"/>
+              <path d="M0,80 L22,74 L44,68 L55,72 L66,62 L88,52 L99,58 L110,46 L132,36 L143,42 L154,30 L176,20 L187,26 L198,14 L220,6 L231,10 L242,4 L260,2" fill="none" stroke="#0071E3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="260" cy="2" r="3.5" fill="#0071E3"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Annotations right side -->
+        <div class="anno-r r1">Recovery first ↗</div>
+        <div class="anno-r r2">Low risk ↗</div>
+        <div class="anno-r r3">High R:R ↗</div>
+        <div class="anno-r r4">Real process ↗</div>
+        <div class="anno-r r5">Sustainable ↗</div>
+
+        <!-- Real Traders card -->
+        <div class="real-card">
+          <div class="rc-title">Real Traders</div>
+          <div class="rc-item"><div class="rc-check"></div>Verified results</div>
+          <div class="rc-item"><div class="rc-check"></div>No fake promises</div>
+          <div class="rc-item"><div class="rc-check"></div>Full transparency</div>
+        </div>
+
+        <!-- Process card -->
+        <div class="proc-card">
+          <div class="pc-title">Process Over Hype</div>
+          <div class="pc-item"><span class="pc-ck">✓</span>Risk management</div>
+          <div class="pc-item"><span class="pc-ck">✓</span>Consistent approach</div>
+          <div class="pc-item"><span class="pc-ck">✓</span>Long-term thinking</div>
+          <div class="pc-item"><span class="pc-ck">✓</span>Real trading habits</div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -298,27 +696,27 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 
 <!-- TWO AUDIENCES -->
 <section style="padding:0;border-bottom:1px solid var(--b1)">
-  <div class="ww">
+  <div style="max-width:1200px;margin:0 auto">
     <div class="aud fade">
       <div class="ac">
         <span class="ac-tag at-u">For users</span>
-        <h2 class="ac-h">Subscribe to<br>performance.</h2>
+        <h2 class="ac-h">Subscribe to performance.</h2>
         <p class="ac-p">You don't follow content. You don't follow promises.<br><strong>You follow results.</strong></p>
         <div class="ac-items">
-          <div class="ac-item"><span class="acn acn-u">①</span><div><strong>Choose by Recovery Rate</strong>Filter traders with 80%+, 85%+, or 90%+ recovery. Your standard, your rules.</div></div>
-          <div class="ac-item"><span class="acn acn-u">②</span><div><strong>Pay monthly subscription</strong>Subscribe to a trader. Flat fee. Cancel anytime.</div></div>
-          <div class="ac-item"><span class="acn acn-u">③</span><div><strong>Receive only real trades</strong>Entry, SL, TP — defined before the outcome. No guesswork.</div></div>
+          <div class="ac-item"><span class="acn acn-u">①</span><div><strong>Choose by Recovery Rate</strong>Filter traders with 80%+, 85%+, or 90%+ recovery.</div></div>
+          <div class="ac-item"><span class="acn acn-u">②</span><div><strong>Pay monthly subscription</strong>Flat fee. Cancel anytime.</div></div>
+          <div class="ac-item"><span class="acn acn-u">③</span><div><strong>Receive only real trades</strong>Entry, SL, TP — defined before the outcome.</div></div>
         </div>
         <a href="subscriber.html" class="ac-a">Browse traders →</a>
       </div>
       <div class="ac dk">
         <span class="ac-tag at-t">For traders</span>
-        <h2 class="ac-h">Compete. Prove.<br>Earn.</h2>
+        <h2 class="ac-h">Compete. Prove. Earn.</h2>
         <p class="ac-p">No followers needed. No marketing needed.<br><strong>Just performance.</strong></p>
         <div class="ac-items">
-          <div class="ac-item"><span class="acn acn-t">①</span><div><strong>Publish your real trades</strong>Lock your entry, SL, and TP. Let the market decide. Your record builds automatically.</div></div>
-          <div class="ac-item"><span class="acn acn-t">②</span><div><strong>Recovery Rate defines your rank</strong>Better recovery = higher rank = more visibility = more subscribers.</div></div>
-          <div class="ac-item"><span class="acn acn-t">③</span><div><strong>Subscribers generate income</strong>Users pay monthly to follow your locked, verified trades.</div></div>
+          <div class="ac-item"><span class="acn acn-t">①</span><div><strong>Publish your real trades</strong>Lock your entry, SL, and TP. Let the market decide.</div></div>
+          <div class="ac-item"><span class="acn acn-t">②</span><div><strong>Recovery Rate defines your rank</strong>Better recovery = higher rank = more subscribers.</div></div>
+          <div class="ac-item"><span class="acn acn-t">③</span><div><strong>Subscribers generate income</strong>Users pay monthly to follow your locked trades.</div></div>
         </div>
         <a href="trader.html" class="ac-a">Start tracking →</a>
       </div>
@@ -332,7 +730,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
     <div class="earn-in fade">
       <div>
         <span class="ey">Turn performance into income</span>
-        <h2 class="sh">Your recovery defines<br>your rank.<br>Your rank drives <em>income.</em></h2>
+        <h2 class="sh">Your recovery defines your rank.<br>Your rank drives <em>income.</em></h2>
         <p class="sb" style="margin-bottom:28px">The better your Recovery Rate, the higher you rank. The higher you rank, the more subscribers find you.</p>
         <div class="chain">
           <div class="ch-s"><span class="ch-n">01</span><div><div class="ch-t">Better Recovery Rate</div><div class="ch-d">Earned through locked, honest trades</div></div><span class="ch-a">↓</span></div>
@@ -362,64 +760,66 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
   <div class="ww">
     <div style="max-width:980px" class="fade">
       <span class="ey">Live ranking</span>
-      <h2 class="sh">Top traders,<br>ranked by recovery.</h2>
-      <p class="sb">Every number calculated from locked, uneditable trades. What you see is what actually happened.</p>
+      <h2 class="sh">Top traders, ranked by recovery.</h2>
+      <p class="sb">Every number calculated from locked, uneditable trades.</p>
     </div>
     <div class="tc-g">
       <a href="profile.html" class="tcard top fade">
         <div class="tc-hd"><div class="tc-tr"><div class="tc-av gld">MR</div><div><div class="tc-nm">M. Reyes</div><div class="tc-td">47 locked · 0 edits</div></div></div><div class="tc-rk r1">#1</div></div>
-        <div class="tc-bd">
-          <div class="tc-rl">Recovery Rate</div><div class="tc-rv hi">94.2<span class="tc-rp">%</span></div>
-          <div class="tc-bar"><div class="tc-fill" style="width:94%"></div></div>
-          <div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">1,240</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$24.8K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">62.1%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.7</div></div></div>
-          <span class="tc-btn">Subscribe · $20/mo</span>
-        </div>
+        <div class="tc-bd"><div class="tc-rl">Recovery Rate</div><div class="tc-rv hi">94.2<span class="tc-rp">%</span></div><div class="tc-bar"><div class="tc-fill" style="width:94%"></div></div><div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">1,240</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$24.8K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">62.1%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.7</div></div></div><span class="tc-btn">Subscribe · $20/mo</span></div>
       </a>
       <a href="profile.html" class="tcard f1">
         <div class="tc-hd"><div class="tc-tr"><div class="tc-av">KL</div><div><div class="tc-nm">K. Laurent</div><div class="tc-td">29 locked · 0 edits</div></div></div><div class="tc-rk">#2</div></div>
-        <div class="tc-bd">
-          <div class="tc-rl">Recovery Rate</div><div class="tc-rv hi">91.4<span class="tc-rp">%</span></div>
-          <div class="tc-bar"><div class="tc-fill" style="width:91%"></div></div>
-          <div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">870</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$17.4K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">58.6%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.4</div></div></div>
-          <span class="tc-btn">Subscribe · $20/mo</span>
-        </div>
+        <div class="tc-bd"><div class="tc-rl">Recovery Rate</div><div class="tc-rv hi">91.4<span class="tc-rp">%</span></div><div class="tc-bar"><div class="tc-fill" style="width:91%"></div></div><div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">870</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$17.4K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">58.6%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.4</div></div></div><span class="tc-btn">Subscribe · $20/mo</span></div>
       </a>
       <a href="profile.html" class="tcard f2">
         <div class="tc-hd"><div class="tc-tr"><div class="tc-av">SR</div><div><div class="tc-nm">S. Rousseau</div><div class="tc-td">18 locked · 0 edits</div></div></div><div class="tc-rk">#3</div></div>
-        <div class="tc-bd">
-          <div class="tc-rl">Recovery Rate</div><div class="tc-rv hi">88.9<span class="tc-rp">%</span></div>
-          <div class="tc-bar"><div class="tc-fill" style="width:89%"></div></div>
-          <div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">612</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$12.2K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">72.2%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.0</div></div></div>
-          <span class="tc-btn">Subscribe · $20/mo</span>
-        </div>
+        <div class="tc-bd"><div class="tc-rl">Recovery Rate</div><div class="tc-rv hi">88.9<span class="tc-rp">%</span></div><div class="tc-bar"><div class="tc-fill" style="width:89%"></div></div><div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">612</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$12.2K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">72.2%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.0</div></div></div><span class="tc-btn">Subscribe · $20/mo</span></div>
       </a>
-      <a href="profile.html" class="tcard fade">
-        <div class="tc-hd"><div class="tc-tr"><div class="tc-av">AT</div><div><div class="tc-nm">A. Tanaka</div><div class="tc-td">63 locked · 0 edits</div></div></div><div class="tc-rk">#4</div></div>
-        <div class="tc-bd">
-          <div class="tc-rl">Recovery Rate</div><div class="tc-rv">86.3<span class="tc-rp">%</span></div>
-          <div class="tc-bar"><div class="tc-fill" style="width:86%"></div></div>
-          <div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">441</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$8.8K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">54.0%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.6</div></div></div>
-          <span class="tc-btn">Subscribe · $20/mo</span>
+    </div>
+
+    <!-- LEADERBOARD TABLE — remaining traders -->
+    <div style="margin-top:12px" class="fade">
+      <div class="lb-wrap">
+        <div class="lb-hd">
+          <div class="lbh">#</div>
+          <div class="lbh">Trader</div>
+          <div class="lbh r">Recovery Rate</div>
+          <div class="lbh r">Win Rate</div>
+          <div class="lbh r">Avg R/R</div>
+          <div class="lbh r">Subscribers / Income</div>
         </div>
-      </a>
-      <a href="profile.html" class="tcard f1">
-        <div class="tc-hd"><div class="tc-tr"><div class="tc-av">DK</div><div><div class="tc-nm">D. Khoury</div><div class="tc-td">41 locked · 0 edits</div></div></div><div class="tc-rk">#5</div></div>
-        <div class="tc-bd">
-          <div class="tc-rl">Recovery Rate</div><div class="tc-rv">83.7<span class="tc-rp">%</span></div>
-          <div class="tc-bar"><div class="tc-fill" style="width:84%"></div></div>
-          <div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">298</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$5.9K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">48.8%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.5</div></div></div>
-          <span class="tc-btn">Subscribe · $20/mo</span>
-        </div>
-      </a>
-      <a href="profile.html" class="tcard f2">
-        <div class="tc-hd"><div class="tc-tr"><div class="tc-av">LP</div><div><div class="tc-nm">L. Park</div><div class="tc-td">22 locked · 0 edits</div></div></div><div class="tc-rk">#6</div></div>
-        <div class="tc-bd">
-          <div class="tc-rl">Recovery Rate</div><div class="tc-rv">80.1<span class="tc-rp">%</span></div>
-          <div class="tc-bar"><div class="tc-fill" style="width:80%"></div></div>
-          <div class="tc-stats"><div class="tc-st"><div class="tc-sl">Subscribers</div><div class="tc-sv">187</div></div><div class="tc-st"><div class="tc-sl">Est. Income</div><div class="tc-sv inc">$3.7K/mo</div></div><div class="tc-st"><div class="tc-sl">Win Rate</div><div class="tc-sv">55.0%</div></div><div class="tc-st"><div class="tc-sl">Avg R/R</div><div class="tc-sv">1 : 2.2</div></div></div>
-          <span class="tc-btn">Subscribe · $20/mo</span>
-        </div>
-      </a>
+        <a href="profile.html" class="lb-row" style="display:grid">
+          <div class="lb-n">4</div>
+          <div class="lb-tc"><div class="lb-av">AT</div><div><div class="lb-nm">A. Tanaka</div><div class="lb-td">63 locked · 0 edits</div></div></div>
+          <div class="lb-rr">86.3%</div><div class="lb-wr">54.0%</div><div class="lb-wr">1 : 2.6</div>
+          <div class="lb-subs-cell"><div class="lb-sv">441 subs</div><div class="lb-il">$8.8K/mo</div></div>
+        </a>
+        <a href="profile.html" class="lb-row" style="display:grid">
+          <div class="lb-n">5</div>
+          <div class="lb-tc"><div class="lb-av">DK</div><div><div class="lb-nm">D. Khoury</div><div class="lb-td">41 locked · 0 edits</div></div></div>
+          <div class="lb-rr">83.7%</div><div class="lb-wr">48.8%</div><div class="lb-wr">1 : 2.5</div>
+          <div class="lb-subs-cell"><div class="lb-sv">298 subs</div><div class="lb-il">$5.9K/mo</div></div>
+        </a>
+        <a href="profile.html" class="lb-row" style="display:grid">
+          <div class="lb-n">6</div>
+          <div class="lb-tc"><div class="lb-av">LP</div><div><div class="lb-nm">L. Park</div><div class="lb-td">22 locked · 0 edits</div></div></div>
+          <div class="lb-rr">80.1%</div><div class="lb-wr">55.0%</div><div class="lb-wr">1 : 2.2</div>
+          <div class="lb-subs-cell"><div class="lb-sv">187 subs</div><div class="lb-il">$3.7K/mo</div></div>
+        </a>
+        <a href="profile.html" class="lb-row" style="display:grid">
+          <div class="lb-n">7</div>
+          <div class="lb-tc"><div class="lb-av">JM</div><div><div class="lb-nm">J. Morales</div><div class="lb-td">33 locked · 0 edits</div></div></div>
+          <div class="lb-rr">78.5%</div><div class="lb-wr">51.5%</div><div class="lb-wr">1 : 2.3</div>
+          <div class="lb-subs-cell"><div class="lb-sv">124 subs</div><div class="lb-il">$2.5K/mo</div></div>
+        </a>
+        <a href="profile.html" class="lb-row" style="display:grid">
+          <div class="lb-n">8</div>
+          <div class="lb-tc"><div class="lb-av">RV</div><div><div class="lb-nm">R. Voronova</div><div class="lb-td">19 locked · 0 edits</div></div></div>
+          <div class="lb-rr">75.2%</div><div class="lb-wr">57.9%</div><div class="lb-wr">1 : 1.9</div>
+          <div class="lb-subs-cell"><div class="lb-sv">88 subs</div><div class="lb-il">$1.8K/mo</div></div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -429,11 +829,11 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
   <div class="w">
     <span class="ey fade" style="display:block;text-align:center">No fake numbers. Ever.</span>
     <h2 class="sh f1" style="text-align:center;margin:0 auto 12px;max-width:600px">Full transparency,<br><em>by default.</em></h2>
-    <p class="sb f2" style="text-align:center;margin:0 auto;max-width:520px">If someone earns more — you see exactly why. Every number is public. Always.</p>
+    <p class="sb f2" style="text-align:center;margin:0 auto;max-width:520px">If someone earns more — you see exactly why.</p>
     <div class="tp-g f3">
-      <div class="tp-c"><div style="font-size:28px;margin-bottom:16px">📊</div><h3>Public performance</h3><p>Every trade ever published — wins, losses, active positions — is visible on every trader's public profile. Full history. Always.</p></div>
-      <div class="tp-c"><div style="font-size:28px;margin-bottom:16px">👥</div><h3>Public subscriber count</h3><p>You can see exactly how many subscribers each trader has and how much they earn. No secrets.</p></div>
-      <div class="tp-c"><div style="font-size:28px;margin-bottom:16px">🏅</div><h3>Public ranking</h3><p>The leaderboard is public. Rank is determined only by Recovery Rate — calculated automatically from locked trades.</p></div>
+      <div class="tp-c"><div style="font-size:28px;margin-bottom:16px">📊</div><h3>Public performance</h3><p>Every trade published — wins, losses, active — visible on every trader's profile. Full history. Always.</p></div>
+      <div class="tp-c"><div style="font-size:28px;margin-bottom:16px">👥</div><h3>Public subscriber count</h3><p>You see exactly how many subscribers each trader has and how much they earn. No secrets.</p></div>
+      <div class="tp-c"><div style="font-size:28px;margin-bottom:16px">🏅</div><h3>Public ranking</h3><p>Rank determined only by Recovery Rate — calculated automatically from locked trades. No gaming.</p></div>
     </div>
   </div>
 </section>
@@ -442,7 +842,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 <section class="fcta">
   <div class="w">
     <h2 class="fcta-h fade">Performance,<br><em>not promises.</em></h2>
-    <p class="fcta-s f1">Start with traders who prove it every day — with locked trades, public records, and a Recovery Rate that speaks for itself.</p>
+    <p class="fcta-s f1">Start with traders who prove it every day — locked trades, public records, and a Recovery Rate that speaks for itself.</p>
     <div class="fcta-btns f2">
       <a href="#traders" class="btn-fp">Explore traders</a>
       <a href="trader.html" class="btn-fo">Start tracking your trades</a>
