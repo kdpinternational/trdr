@@ -33,8 +33,14 @@ nav{
   border-bottom:1px solid var(--b1);
   height:52px;
   display:flex;align-items:center;
+  padding:0;
+}
+.nav-inner{
+  max-width:1160px;
+  margin:0 auto;
   padding:0 32px;
-  justify-content:space-between;
+  width:100%;
+  display:flex;align-items:center;justify-content:space-between;
 }
 /* Left group: logo + links together */
 .nav-left{display:flex;align-items:center;gap:8px}
@@ -467,17 +473,19 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 
 <!-- NAV: logo + links LEFT, cabinet buttons RIGHT -->
 <nav>
-  <div class="nav-left">
-    <a href="index.html" class="logo">TRDR</a>
-    <ul class="nav-links">
-      <li><a href="#how">How it works</a></li>
-      <li><a href="#traders">Top Traders</a></li>
-      <li><a href="trader.html">For Traders</a></li>
-    </ul>
-  </div>
-  <div class="nav-right">
-    <a href="subscriber.html" class="btn-follower">Follower Cabinet</a>
-    <a href="trader.html" class="btn-trader">Trader Cabinet</a>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="index.html" class="logo">TRDR</a>
+      <ul class="nav-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#traders">Top Traders</a></li>
+        <li><a href="trader.html">For Traders</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <a href="subscriber.html" class="btn-follower">Follower Cabinet</a>
+      <a href="trader.html" class="btn-trader">Trader Cabinet</a>
+    </div>
   </div>
 </nav>
 
