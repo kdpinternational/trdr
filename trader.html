@@ -21,7 +21,10 @@
   --sh2:0 4px 24px rgba(0,0,0,.10),0 0 0 1px rgba(0,0,0,.05);
 }
 body{font-family:var(--f);background:var(--g1);color:var(--ink);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);height:52px;display:flex;align-items:center;padding:0 32px;justify-content:space-between}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);height:52px;display:flex;align-items:center;padding:0}
+.nav-inner{max-width:1160px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;justify-content:space-between}
 .logo{font-size:17px;font-weight:800;letter-spacing:-.03em;color:var(--ink);text-decoration:none}
 .nav-tabs{display:flex;gap:2px}
 .tab{font-size:13px;color:var(--ink3);background:none;border:none;padding:6px 14px;border-radius:var(--r);cursor:pointer;font-family:var(--f);transition:color .15s,background .15s}
@@ -29,11 +32,13 @@ nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.92);backdrop-
 .badge{font-family:var(--mono);font-size:10px;padding:2px 9px;border-radius:100px;background:var(--g2);color:var(--ink4);border:1px solid var(--b1)}
 .btn-dk{font-size:13px;font-weight:600;color:#fff;background:var(--ink);padding:7px 18px;border-radius:100px;text-decoration:none;border:none;cursor:pointer;font-family:var(--f);transition:opacity .15s}
 .btn-dk:hover{opacity:.78}
+
 main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
 .card{background:var(--w);border:1px solid var(--b1);border-radius:var(--r4);overflow:hidden;box-shadow:var(--sh)}
 .ch{padding:14px 20px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;background:var(--g1)}
 .ct{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
 .view{display:none}.view.on{display:block}
+
 /* PILLS */
 .pill-g{background:var(--gd);color:var(--green);border:1px solid rgba(48,164,108,.2);border-radius:100px;padding:2px 9px;font-family:var(--mono);font-size:10px}
 .pill-r{background:var(--rd);color:var(--red);border:1px solid rgba(217,48,37,.18);border-radius:100px;padding:2px 9px;font-family:var(--mono);font-size:10px}
@@ -41,23 +46,27 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
 .pill-live{background:var(--gd);color:var(--green);border:1px solid rgba(48,164,108,.2);border-radius:100px;padding:3px 10px;font-family:var(--mono);font-size:10px;display:inline-flex;align-items:center;gap:5px}
 .pill-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
 /* API BANNER */
 .api-banner{background:#FAEEDA;border:1px solid rgba(180,83,9,.2);border-radius:var(--r3);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .ab-text{font-size:13px;color:#633806;flex:1;min-width:200px}
 .ab-text strong{color:#412402}.ab-text a{color:var(--amber);font-weight:500}
 .api-inp{padding:7px 12px;font-family:var(--mono);font-size:12px;border:1px solid rgba(180,83,9,.3);border-radius:var(--r);background:#fff;color:var(--ink);width:240px;outline:none}
 .api-save{padding:7px 14px;background:var(--amber);color:#fff;border:none;border-radius:var(--r);cursor:pointer;font-size:13px;font-weight:500;font-family:var(--f)}
+.api-change{font-size:12px;color:var(--ink3);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:var(--f)}
+
 /* STATS */
 .stat-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
 .stat{background:var(--g2);border-radius:var(--r2);padding:16px 18px}
 .st-l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
 .st-v{font-size:26px;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:4px}
-.st-v.g{color:var(--green)}.st-v.am{color:var(--amber)}.st-v.dim{color:var(--ink4)}
+.st-v.g{color:var(--green)}.st-v.dim{color:var(--ink4)}
 .st-s{font-size:12px;color:var(--ink3)}
 .empty-state{padding:48px 24px;text-align:center}
 .es-icon{font-size:32px;margin-bottom:12px}
 .es-h{font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
 .es-p{font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:20px}
+
 /* TABLE */
 .tbl-head{display:grid;grid-template-columns:10px 120px 100px 1fr 70px 68px 80px;gap:12px;padding:9px 20px;border-bottom:1px solid var(--b1);background:var(--g1)}
 .tbl-h{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
@@ -78,16 +87,15 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
 .t-r{font-family:var(--mono);font-size:12px;font-weight:600;text-align:right}
 .tr-pos{color:var(--green)}.tr-neg{color:var(--red)}
 .t-tm{font-family:var(--mono);font-size:10px;color:var(--ink4);text-align:right}
+
 /* PUBLISH */
 .pf-layout{display:grid;grid-template-columns:1fr 290px;gap:20px}
 .fb{margin-bottom:22px}
 .fl{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px;display:block}
 .fhint{font-size:12px;font-weight:300;color:var(--ink4);margin-top:4px}
 .fhint.err{color:var(--red);font-weight:400}
-/* SELECT */
 .inst-sel{width:100%;padding:10px 36px 10px 14px;font-size:14px;font-family:var(--mono);border-radius:var(--r2);border:1px solid var(--b2);background:var(--g1);color:var(--ink);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%236E6E73' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;transition:border-color .15s}
 .inst-sel:focus{border-color:var(--ink);background-color:var(--w)}
-/* DIR */
 .dir-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .dir-btn{padding:14px;border-radius:var(--r2);border:1px solid var(--b1);background:var(--w);cursor:pointer;font-size:15px;font-weight:500;transition:all .15s;font-family:var(--f);display:flex;align-items:center;justify-content:center;gap:8px}
 .dir-btn:hover{background:var(--g1)}
@@ -98,19 +106,41 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
 .fin.err{border-color:var(--red)!important}
 .btn-pub{width:100%;padding:14px;font-size:16px;font-weight:600;color:#fff;background:var(--ink);border:none;border-radius:var(--r3);cursor:pointer;font-family:var(--f);transition:opacity .15s;margin-top:4px}
 .btn-pub:hover{opacity:.82}.btn-pub:disabled{opacity:.35;cursor:not-allowed}
+
 /* SIDEBAR */
 .side-block{display:flex;flex-direction:column;gap:12px;position:sticky;top:68px}
 .sc{background:var(--w);border:1px solid var(--b1);border-radius:var(--r4);overflow:hidden;box-shadow:var(--sh)}
 .sc-h{padding:13px 18px;border-bottom:1px solid var(--b1);font-size:13px;font-weight:600;color:var(--ink);display:flex;align-items:center;justify-content:space-between}
 .sc-b{padding:16px 18px}
 .live-sym{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px}
-.live-val{font-size:36px;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:4px}
+
+/* LIVE PRICE with copy button */
+.live-price-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.live-val{font-size:36px;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1}
+.copy-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:var(--r2);
+  background:var(--g1);border:1px solid var(--b1);
+  cursor:pointer;transition:background .15s,border-color .15s;
+  flex-shrink:0;margin-top:2px;
+}
+.copy-btn:hover{background:var(--g2);border-color:var(--b2)}
+.copy-btn svg{width:14px;height:14px;color:var(--ink3)}
+.copy-btn.copied{background:#EAF3DE;border-color:rgba(48,164,108,.25)}
+.copy-btn.copied svg{color:var(--green)}
+.copy-hint{font-size:11px;color:var(--green);font-family:var(--mono);margin-top:2px;height:14px;transition:opacity .2s}
+
 .live-sub{font-size:12px;color:var(--ink4)}
 .chg-up{color:var(--green);font-family:var(--mono);font-size:11px;margin-top:4px}
 .chg-dn{color:var(--red);font-family:var(--mono);font-size:11px;margin-top:4px}
+.refresh-bar{height:2px;background:var(--g2);border-radius:1px;margin-top:10px;overflow:hidden}
+.refresh-fill{height:100%;background:var(--blue);border-radius:1px;transition:width .1s linear}
+.refresh-lbl{font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:4px;text-align:right;letter-spacing:.04em}
+
 .rr-val{font-size:36px;font-weight:700;letter-spacing:-.04em;color:var(--green);line-height:1;margin-bottom:8px}
 .rule-item{font-size:12px;color:var(--ink3);display:flex;gap:8px;margin-bottom:8px;line-height:1.5;align-items:flex-start}
 .rule-ck{color:var(--green);flex-shrink:0}
+
 /* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)}
 .modal{background:var(--w);border-radius:var(--r4);box-shadow:0 8px 48px rgba(0,0,0,.18);width:100%;max-width:480px;overflow:hidden}
@@ -130,6 +160,7 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
 .btn-back{flex:1;padding:12px;background:var(--g1);border:1px solid var(--b1);border-radius:var(--r3);cursor:pointer;font-size:14px;font-weight:500;color:var(--ink3);font-family:var(--f)}
 .btn-lock{flex:2;padding:12px;background:var(--ink);border:none;border-radius:var(--r3);cursor:pointer;font-size:14px;font-weight:600;color:#fff;font-family:var(--f);transition:opacity .15s}
 .btn-lock:hover{opacity:.82}
+
 /* SUCCESS */
 .suc-wrap{max-width:500px;margin:60px auto}
 .suc-card{background:var(--w);border-radius:var(--r4);box-shadow:var(--sh2);padding:48px;text-align:center}
@@ -159,26 +190,35 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
 </div>
 
 <nav>
-  <a href="index.html" class="logo">TRDR</a>
-  <div class="nav-tabs">
-    <button class="tab on" id="tab-dashboard" onclick="showView('dashboard')">Dashboard</button>
-    <button class="tab" id="tab-publish" onclick="showView('publish')">Publish Trade</button>
-    <button class="tab" id="tab-history" onclick="showView('history')">My Trades</button>
-  </div>
-  <div style="display:flex;align-items:center;gap:10px">
-    <span class="badge">Trader</span>
-    <a href="index.html" style="font-size:13px;color:var(--ink3);text-decoration:none;padding:7px 14px">← Back to site</a>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">TRDR</a>
+    <div class="nav-tabs">
+      <button class="tab on" id="tab-dashboard" onclick="showView('dashboard')">Dashboard</button>
+      <button class="tab" id="tab-publish" onclick="showView('publish')">Publish Trade</button>
+      <button class="tab" id="tab-history" onclick="showView('history')">My Trades</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="badge">Trader</span>
+      <a href="index.html" style="font-size:13px;color:var(--ink3);text-decoration:none;padding:7px 14px">← Back to site</a>
+    </div>
   </div>
 </nav>
 
 <main>
+
+<!-- API KEY BANNER — hidden if key saved -->
 <div class="api-banner" id="api-banner">
-  <div class="ab-text"><strong>⚠ Add your API key to enable live prices.</strong> Free key at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a> (sign up → API Keys tab, no credit card).</div>
+  <div class="ab-text">
+    <strong>⚠ Add your API key to enable live prices.</strong>
+    Free key at <a href="https://twelvedata.com" target="_blank">twelvedata.com</a>
+    (sign up → API Keys tab, no credit card).
+    <br><small style="color:#854F0B;margin-top:4px;display:block">💡 Always open the site from your main Vercel URL (not preview links) so the key stays saved.</small>
+  </div>
   <input class="api-inp" type="text" id="api-inp" placeholder="Paste API key here…">
   <button class="api-save" onclick="saveKey()">Save &amp; Enable</button>
 </div>
 
-<!-- DASHBOARD -->
+<!-- ═══ DASHBOARD ═══ -->
 <div class="view on" id="view-dashboard">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
     <div><h1 style="font-size:26px;font-weight:700;letter-spacing:-.035em;margin-bottom:4px">Dashboard</h1><p style="font-size:13px;color:var(--ink3)">Your trading record — locked and public.</p></div>
@@ -198,72 +238,75 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
   </div>
 </div>
 
-<!-- PUBLISH -->
+<!-- ═══ PUBLISH ═══ -->
 <div class="view" id="view-publish">
   <div style="margin-bottom:24px"><h1 style="font-size:26px;font-weight:700;letter-spacing:-.035em;margin-bottom:4px">Publish a Trade</h1><p style="font-size:13px;color:var(--ink3)">Every trade is a decision. Published manually. Locked forever.</p></div>
   <div id="pub-suc" style="display:none"></div>
   <div class="pf-layout" id="pf-wrap">
+    <!-- FORM -->
     <div class="card">
       <div class="ch"><span class="ct">Trade details</span></div>
       <div style="padding:22px">
+        <!-- INSTRUMENT -->
         <div class="fb">
           <label class="fl">Instrument</label>
           <select class="inst-sel" id="inst-sel" onchange="onPairChange()">
             <optgroup label="── METALS ──">
-              <option value="XAU/USD" data-dec="2">XAU/USD — Gold</option>
-              <option value="XAG/USD" data-dec="3">XAG/USD — Silver</option>
+              <option value="XAU/USD" data-dec="2" data-step="0.01">XAU/USD — Gold</option>
+              <option value="XAG/USD" data-dec="3" data-step="0.001">XAG/USD — Silver</option>
             </optgroup>
             <optgroup label="── MAJOR PAIRS ──">
-              <option value="EUR/USD" data-dec="4">EUR/USD — Euro / US Dollar</option>
-              <option value="GBP/USD" data-dec="4">GBP/USD — British Pound / USD</option>
-              <option value="USD/JPY" data-dec="2">USD/JPY — US Dollar / Japanese Yen</option>
-              <option value="USD/CHF" data-dec="4">USD/CHF — US Dollar / Swiss Franc</option>
-              <option value="AUD/USD" data-dec="4">AUD/USD — Australian Dollar / USD</option>
-              <option value="USD/CAD" data-dec="4">USD/CAD — US Dollar / Canadian Dollar</option>
-              <option value="NZD/USD" data-dec="4">NZD/USD — New Zealand Dollar / USD</option>
-              <option value="USD/SGD" data-dec="4">USD/SGD — US Dollar / Singapore Dollar</option>
+              <option value="EUR/USD" data-dec="5" data-step="0.00001">EUR/USD — Euro / US Dollar</option>
+              <option value="GBP/USD" data-dec="5" data-step="0.00001">GBP/USD — British Pound / USD</option>
+              <option value="USD/JPY" data-dec="3" data-step="0.001">USD/JPY — US Dollar / Japanese Yen</option>
+              <option value="USD/CHF" data-dec="5" data-step="0.00001">USD/CHF — US Dollar / Swiss Franc</option>
+              <option value="AUD/USD" data-dec="5" data-step="0.00001">AUD/USD — Australian Dollar / USD</option>
+              <option value="USD/CAD" data-dec="5" data-step="0.00001">USD/CAD — US Dollar / Canadian Dollar</option>
+              <option value="NZD/USD" data-dec="5" data-step="0.00001">NZD/USD — New Zealand Dollar / USD</option>
+              <option value="USD/SGD" data-dec="5" data-step="0.00001">USD/SGD — US Dollar / Singapore Dollar</option>
             </optgroup>
             <optgroup label="── EUR CROSSES ──">
-              <option value="EUR/GBP" data-dec="4">EUR/GBP</option>
-              <option value="EUR/JPY" data-dec="2">EUR/JPY</option>
-              <option value="EUR/CHF" data-dec="4">EUR/CHF</option>
-              <option value="EUR/AUD" data-dec="4">EUR/AUD</option>
-              <option value="EUR/CAD" data-dec="4">EUR/CAD</option>
-              <option value="EUR/NZD" data-dec="4">EUR/NZD</option>
+              <option value="EUR/GBP" data-dec="5" data-step="0.00001">EUR/GBP</option>
+              <option value="EUR/JPY" data-dec="3" data-step="0.001">EUR/JPY</option>
+              <option value="EUR/CHF" data-dec="5" data-step="0.00001">EUR/CHF</option>
+              <option value="EUR/AUD" data-dec="5" data-step="0.00001">EUR/AUD</option>
+              <option value="EUR/CAD" data-dec="5" data-step="0.00001">EUR/CAD</option>
+              <option value="EUR/NZD" data-dec="5" data-step="0.00001">EUR/NZD</option>
             </optgroup>
             <optgroup label="── GBP CROSSES ──">
-              <option value="GBP/JPY" data-dec="2">GBP/JPY</option>
-              <option value="GBP/CHF" data-dec="4">GBP/CHF</option>
-              <option value="GBP/AUD" data-dec="4">GBP/AUD</option>
-              <option value="GBP/CAD" data-dec="4">GBP/CAD</option>
-              <option value="GBP/NZD" data-dec="4">GBP/NZD</option>
+              <option value="GBP/JPY" data-dec="3" data-step="0.001">GBP/JPY</option>
+              <option value="GBP/CHF" data-dec="5" data-step="0.00001">GBP/CHF</option>
+              <option value="GBP/AUD" data-dec="5" data-step="0.00001">GBP/AUD</option>
+              <option value="GBP/CAD" data-dec="5" data-step="0.00001">GBP/CAD</option>
+              <option value="GBP/NZD" data-dec="5" data-step="0.00001">GBP/NZD</option>
             </optgroup>
             <optgroup label="── AUD / NZD CROSSES ──">
-              <option value="AUD/JPY" data-dec="2">AUD/JPY</option>
-              <option value="AUD/CHF" data-dec="4">AUD/CHF</option>
-              <option value="AUD/CAD" data-dec="4">AUD/CAD</option>
-              <option value="AUD/NZD" data-dec="4">AUD/NZD</option>
-              <option value="NZD/JPY" data-dec="2">NZD/JPY</option>
-              <option value="NZD/CHF" data-dec="4">NZD/CHF</option>
-              <option value="NZD/CAD" data-dec="4">NZD/CAD</option>
+              <option value="AUD/JPY" data-dec="3" data-step="0.001">AUD/JPY</option>
+              <option value="AUD/CHF" data-dec="5" data-step="0.00001">AUD/CHF</option>
+              <option value="AUD/CAD" data-dec="5" data-step="0.00001">AUD/CAD</option>
+              <option value="AUD/NZD" data-dec="5" data-step="0.00001">AUD/NZD</option>
+              <option value="NZD/JPY" data-dec="3" data-step="0.001">NZD/JPY</option>
+              <option value="NZD/CHF" data-dec="5" data-step="0.00001">NZD/CHF</option>
+              <option value="NZD/CAD" data-dec="5" data-step="0.00001">NZD/CAD</option>
             </optgroup>
             <optgroup label="── OTHER CROSSES ──">
-              <option value="CAD/JPY" data-dec="2">CAD/JPY</option>
-              <option value="CAD/CHF" data-dec="4">CAD/CHF</option>
-              <option value="CHF/JPY" data-dec="2">CHF/JPY</option>
+              <option value="CAD/JPY" data-dec="3" data-step="0.001">CAD/JPY</option>
+              <option value="CAD/CHF" data-dec="5" data-step="0.00001">CAD/CHF</option>
+              <option value="CHF/JPY" data-dec="3" data-step="0.001">CHF/JPY</option>
             </optgroup>
             <optgroup label="── USD EXOTICS ──">
-              <option value="USD/MXN" data-dec="4">USD/MXN — Mexican Peso</option>
-              <option value="USD/TRY" data-dec="4">USD/TRY — Turkish Lira</option>
-              <option value="USD/ZAR" data-dec="4">USD/ZAR — South African Rand</option>
-              <option value="USD/NOK" data-dec="4">USD/NOK — Norwegian Krone</option>
-              <option value="USD/SEK" data-dec="4">USD/SEK — Swedish Krona</option>
-              <option value="USD/DKK" data-dec="4">USD/DKK — Danish Krone</option>
-              <option value="USD/HUF" data-dec="2">USD/HUF — Hungarian Forint</option>
-              <option value="USD/PLN" data-dec="4">USD/PLN — Polish Zloty</option>
+              <option value="USD/MXN" data-dec="4" data-step="0.0001">USD/MXN — Mexican Peso</option>
+              <option value="USD/TRY" data-dec="4" data-step="0.0001">USD/TRY — Turkish Lira</option>
+              <option value="USD/ZAR" data-dec="4" data-step="0.0001">USD/ZAR — South African Rand</option>
+              <option value="USD/NOK" data-dec="4" data-step="0.0001">USD/NOK — Norwegian Krone</option>
+              <option value="USD/SEK" data-dec="4" data-step="0.0001">USD/SEK — Swedish Krona</option>
+              <option value="USD/DKK" data-dec="4" data-step="0.0001">USD/DKK — Danish Krone</option>
+              <option value="USD/HUF" data-dec="2" data-step="0.01">USD/HUF — Hungarian Forint</option>
+              <option value="USD/PLN" data-dec="4" data-step="0.0001">USD/PLN — Polish Zloty</option>
             </optgroup>
           </select>
         </div>
+        <!-- DIRECTION -->
         <div class="fb">
           <label class="fl">Direction</label>
           <div class="dir-wrap">
@@ -271,31 +314,51 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
             <button class="dir-btn" id="btn-sell" onclick="setDir('SELL')">↓ Sell / Short</button>
           </div>
         </div>
+        <!-- STOP LOSS -->
         <div class="fb">
           <label class="fl">Stop Loss</label>
-          <input class="fin" type="number" step="any" id="inp-sl" oninput="calcRR()" placeholder="0.00000">
+          <input class="fin" type="number" step="0.00001" id="inp-sl" oninput="calcRR()" placeholder="0.00000">
           <span class="fhint" id="hint-sl">Must be below entry price for BUY</span>
         </div>
+        <!-- TAKE PROFIT -->
         <div class="fb">
           <label class="fl">Take Profit</label>
-          <input class="fin" type="number" step="any" id="inp-tp" oninput="calcRR()" placeholder="0.00000">
+          <input class="fin" type="number" step="0.00001" id="inp-tp" oninput="calcRR()" placeholder="0.00000">
           <span class="fhint" id="hint-tp">Must be above entry price for BUY</span>
         </div>
         <button class="btn-pub" id="btn-pub" onclick="tryPublish()">Preview &amp; Confirm →</button>
       </div>
     </div>
+
+    <!-- SIDEBAR -->
     <div class="side-block">
+      <!-- LIVE PRICE -->
       <div class="sc">
         <div class="sc-h"><span>Live price</span><span id="live-badge" class="pill-gy">—</span></div>
         <div class="sc-b">
           <div class="live-sym" id="live-sym">XAU/USD</div>
-          <div class="live-val" id="live-val">—</div>
+          <!-- Price + Copy button -->
+          <div class="live-price-row">
+            <div class="live-val" id="live-val">—</div>
+            <button class="copy-btn" id="copy-btn" onclick="copyPrice()" title="Copy price to clipboard">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="copy-hint" id="copy-hint" style="opacity:0"></div>
           <div id="live-chg"></div>
-          <div style="height:1px;background:var(--b1);margin:12px 0"></div>
+          <div style="height:1px;background:var(--b1);margin:10px 0"></div>
           <div class="live-sub" id="live-sub">Add API key above to see live price</div>
+          <!-- Progress bar showing next refresh -->
+          <div class="refresh-bar"><div class="refresh-fill" id="refresh-fill" style="width:100%"></div></div>
+          <div class="refresh-lbl" id="refresh-lbl">Refreshes every 5s</div>
           <div style="font-size:12px;color:var(--ink4);margin-top:6px">Entry locked at this price on publish</div>
         </div>
       </div>
+
+      <!-- R/R -->
       <div class="sc" id="rr-card" style="display:none">
         <div class="sc-h"><span>Risk / Reward</span></div>
         <div class="sc-b">
@@ -307,6 +370,8 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
           </div>
         </div>
       </div>
+
+      <!-- RULES -->
       <div class="sc">
         <div class="sc-h"><span>Before you publish</span></div>
         <div class="sc-b">
@@ -320,21 +385,37 @@ main{max-width:1140px;margin:0 auto;padding:24px 32px 64px}
   </div>
 </div>
 
-<!-- HISTORY -->
+<!-- ═══ HISTORY ═══ -->
 <div class="view" id="view-history">
   <div style="margin-bottom:24px"><h1 style="font-size:26px;font-weight:700;letter-spacing:-.035em;margin-bottom:4px">My Trades</h1><p style="font-size:13px;color:var(--ink3)" id="hist-count">0 trades · all locked · 0 edits</p></div>
   <div class="card"><div id="hist-tbl"></div></div>
 </div>
+
 </main>
 
 <script>
-const KS='trdr_api_key', TS='trdr_trades';
-let API_KEY=localStorage.getItem(KS)||'';
-let trades=JSON.parse(localStorage.getItem(TS)||'[]');
-let selDir='BUY', livePrice=null, priceDec=2, priceTimer=null, pending=null;
+// ═══════════════════════════════════════════
+//  STORAGE KEYS
+// ═══════════════════════════════════════════
+const KS = 'trdr_api_key';
+const TS = 'trdr_trades';
 
-const DEMO={
-  'XAU/USD':2318.40,'XAG/USD':27.44,'EUR/USD':1.08742,'GBP/USD':1.27418,
+// Try to load API key — works on the SAME domain only
+// Different Vercel preview URLs = different localStorage
+let API_KEY = localStorage.getItem(KS) || '';
+let trades = JSON.parse(localStorage.getItem(TS) || '[]');
+let selDir = 'BUY';
+let livePrice = null;
+let priceDec = 2;
+let priceStep = '0.01';
+let priceTimer = null;
+let refreshCountdown = 5;
+let countdownTimer = null;
+let pending = null;
+
+// Demo fallback prices
+const DEMO = {
+  'XAU/USD':2318.40,'XAG/USD':27.441,'EUR/USD':1.08742,'GBP/USD':1.27418,
   'USD/JPY':149.382,'USD/CHF':0.90218,'AUD/USD':0.65342,'USD/CAD':1.36718,
   'NZD/USD':0.60122,'EUR/GBP':0.85348,'EUR/JPY':162.458,'GBP/JPY':190.124,
   'EUR/CHF':0.97220,'EUR/AUD':1.66402,'EUR/CAD':1.48320,'EUR/NZD':1.80124,
@@ -342,199 +423,336 @@ const DEMO={
   'AUD/JPY':97.618,'AUD/CHF':0.59032,'AUD/CAD':0.89342,'AUD/NZD':1.08412,
   'NZD/JPY':89.724,'NZD/CHF':0.54212,'NZD/CAD':0.82140,
   'CAD/JPY':109.340,'CAD/CHF':0.66012,'CHF/JPY':165.472,
-  'USD/MXN':17.145,'USD/TRY':32.214,'USD/ZAR':18.924,
-  'USD/NOK':10.642,'USD/SEK':10.428,'USD/DKK':6.892,
+  'USD/MXN':17.1450,'USD/TRY':32.2140,'USD/ZAR':18.9240,
+  'USD/NOK':10.6420,'USD/SEK':10.4280,'USD/DKK':6.8920,
   'USD/HUF':358.24,'USD/PLN':4.0124,'USD/SGD':1.3442
 };
 
-function saveKey(){
-  const v=document.getElementById('api-inp').value.trim();
-  if(!v)return;
-  API_KEY=v; localStorage.setItem(KS,v);
-  document.getElementById('api-banner').style.display='none';
+// ═══ API KEY ═══════════════════════════════
+function saveKey() {
+  const v = document.getElementById('api-inp').value.trim();
+  if (!v) return;
+  API_KEY = v;
+  localStorage.setItem(KS, v);
+  document.getElementById('api-banner').style.display = 'none';
+  restartPriceFetch();
+}
+
+// Show or hide banner
+if (API_KEY) {
+  document.getElementById('api-banner').style.display = 'none';
+}
+
+// ═══ PAIR SELECTION ════════════════════════
+function getOpt() {
+  const s = document.getElementById('inst-sel');
+  return s.options[s.selectedIndex];
+}
+function getPair() { return document.getElementById('inst-sel').value; }
+
+function onPairChange() {
+  const opt = getOpt();
+  priceDec = parseInt(opt.dataset.dec) || 5;
+  priceStep = opt.dataset.step || '0.00001';
+
+  // Update input steps and placeholders
+  const dec0 = '0.' + '0'.repeat(priceDec);
+  document.getElementById('inp-sl').step = priceStep;
+  document.getElementById('inp-sl').placeholder = dec0;
+  document.getElementById('inp-tp').step = priceStep;
+  document.getElementById('inp-tp').placeholder = dec0;
+
+  document.getElementById('live-sym').textContent = getPair();
+  document.getElementById('live-val').textContent = '—';
+  document.getElementById('live-chg').innerHTML = '';
+  document.getElementById('rr-card').style.display = 'none';
+  livePrice = null;
+  restartPriceFetch();
+}
+
+// ═══ LIVE PRICE ════════════════════════════
+async function fetchPrice() {
+  const badge = document.getElementById('live-badge');
+  const valEl = document.getElementById('live-val');
+  const subEl = document.getElementById('live-sub');
+  const pair = getPair();
+
+  if (!API_KEY) {
+    // Demo mode
+    livePrice = DEMO[pair] || 1.0;
+    valEl.textContent = livePrice.toFixed(priceDec);
+    badge.className = 'pill-gy'; badge.textContent = 'Demo';
+    subEl.textContent = 'Demo prices — add API key for live';
+    document.getElementById('btn-pub').disabled = false;
+    calcRR();
+    startCountdown();
+    return;
+  }
+
+  try {
+    const url = `https://api.twelvedata.com/quote?symbol=${encodeURIComponent(pair)}&apikey=${API_KEY}`;
+    const res = await fetch(url);
+    const d = await res.json();
+    if (d.code || d.status === 'error') throw new Error(d.message || 'API error');
+
+    livePrice = parseFloat(d.close || d.price || 0);
+    const chg = parseFloat(d.change || 0);
+    const pct = parseFloat(d.percent_change || 0);
+    const up = chg >= 0;
+
+    valEl.textContent = livePrice.toFixed(priceDec);
+    badge.className = 'pill-live'; badge.textContent = 'Live';
+    subEl.textContent = 'Live from Twelve Data';
+
+    const ce = document.getElementById('live-chg');
+    ce.className = up ? 'chg-up' : 'chg-dn';
+    ce.textContent = `${up?'+':''}${chg.toFixed(priceDec)} (${up?'+':''}${pct.toFixed(2)}%)`;
+
+    document.getElementById('btn-pub').disabled = false;
+    calcRR();
+    startCountdown();
+  } catch(e) {
+    badge.className = 'pill-r'; badge.textContent = 'Error';
+    valEl.textContent = '—'; subEl.textContent = e.message || 'Check API key';
+    document.getElementById('btn-pub').disabled = true;
+  }
+}
+
+function startCountdown() {
+  if (countdownTimer) clearInterval(countdownTimer);
+  refreshCountdown = 5;
+  const fill = document.getElementById('refresh-fill');
+  const lbl = document.getElementById('refresh-lbl');
+  fill.style.width = '100%';
+  countdownTimer = setInterval(() => {
+    refreshCountdown--;
+    fill.style.width = (refreshCountdown / 5 * 100) + '%';
+    lbl.textContent = refreshCountdown > 0 ? `Next update in ${refreshCountdown}s` : 'Updating…';
+    if (refreshCountdown <= 0) {
+      clearInterval(countdownTimer);
+      fetchPrice();
+    }
+  }, 1000);
+}
+
+function restartPriceFetch() {
+  if (priceTimer) clearInterval(priceTimer);
+  if (countdownTimer) clearInterval(countdownTimer);
   fetchPrice();
 }
-if(API_KEY) document.getElementById('api-banner').style.display='none';
 
-function getOpt(){const s=document.getElementById('inst-sel');return s.options[s.selectedIndex];}
-function getPair(){return document.getElementById('inst-sel').value;}
-
-function onPairChange(){
-  priceDec=parseInt(getOpt().dataset.dec)||4;
-  document.getElementById('live-sym').textContent=getPair();
-  document.getElementById('live-val').textContent='—';
-  document.getElementById('live-chg').innerHTML='';
-  document.getElementById('rr-card').style.display='none';
-  livePrice=null; fetchPrice();
+// ═══ COPY PRICE ════════════════════════════
+function copyPrice() {
+  if (!livePrice) return;
+  const text = livePrice.toFixed(priceDec);
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const hint = document.getElementById('copy-hint');
+    btn.classList.add('copied');
+    hint.textContent = 'Copied!';
+    hint.style.opacity = '1';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      hint.style.opacity = '0';
+    }, 2000);
+  }).catch(() => {
+    // Fallback for browsers without clipboard API
+    const ta = document.createElement('textarea');
+    ta.value = livePrice.toFixed(priceDec);
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const hint = document.getElementById('copy-hint');
+    hint.textContent = 'Copied!'; hint.style.opacity = '1';
+    setTimeout(() => { hint.style.opacity = '0'; }, 2000);
+  });
 }
 
-async function fetchPrice(){
-  const badge=document.getElementById('live-badge');
-  const valEl=document.getElementById('live-val');
-  const subEl=document.getElementById('live-sub');
-  const pair=getPair();
-  if(!API_KEY){
-    livePrice=DEMO[pair]||1.0;
-    valEl.textContent=livePrice.toFixed(priceDec);
-    badge.className='pill-gy'; badge.textContent='Demo';
-    subEl.textContent='Add API key for live prices';
-    document.getElementById('btn-pub').disabled=false;
-    calcRR(); return;
-  }
-  badge.className='pill-gy'; badge.textContent='…'; valEl.textContent='…';
-  try{
-    const r=await fetch(`https://api.twelvedata.com/quote?symbol=${encodeURIComponent(pair)}&apikey=${API_KEY}`);
-    const d=await r.json();
-    if(d.code||d.status==='error') throw new Error(d.message||'API error');
-    livePrice=parseFloat(d.close||d.price||0);
-    const chg=parseFloat(d.change||0), pct=parseFloat(d.percent_change||0), up=chg>=0;
-    valEl.textContent=livePrice.toFixed(priceDec);
-    badge.className='pill-live'; badge.textContent='Live';
-    subEl.textContent='Refreshes every 30 seconds';
-    const ce=document.getElementById('live-chg');
-    ce.className=up?'chg-up':'chg-dn';
-    ce.textContent=`${up?'+':''}${chg.toFixed(priceDec)} (${up?'+':''}${pct.toFixed(2)}%)`;
-    document.getElementById('btn-pub').disabled=false; calcRR();
-  }catch(e){
-    badge.className='pill-r'; badge.textContent='Error';
-    valEl.textContent='—'; subEl.textContent=e.message||'Check API key';
-    document.getElementById('btn-pub').disabled=true;
-  }
-}
-
-function startRefresh(){
-  if(priceTimer) clearInterval(priceTimer);
-  fetchPrice(); priceTimer=setInterval(fetchPrice,30000);
-}
-
-function setDir(d){
-  selDir=d;
-  document.getElementById('btn-buy').className='dir-btn'+(d==='BUY'?' sel-buy':'');
-  document.getElementById('btn-sell').className='dir-btn'+(d==='SELL'?' sel-sell':'');
-  document.getElementById('hint-sl').textContent=d==='BUY'?'Must be below entry price for BUY':'Must be above entry price for SELL';
-  document.getElementById('hint-tp').textContent=d==='BUY'?'Must be above entry price for BUY':'Must be below entry price for SELL';
+// ═══ DIRECTION ═════════════════════════════
+function setDir(d) {
+  selDir = d;
+  document.getElementById('btn-buy').className = 'dir-btn' + (d==='BUY' ? ' sel-buy' : '');
+  document.getElementById('btn-sell').className = 'dir-btn' + (d==='SELL' ? ' sel-sell' : '');
+  const hSL = d==='BUY' ? 'Must be below entry price for BUY' : 'Must be above entry price for SELL';
+  const hTP = d==='BUY' ? 'Must be above entry price for BUY' : 'Must be below entry price for SELL';
+  document.getElementById('hint-sl').textContent = hSL;
+  document.getElementById('hint-tp').textContent = hTP;
   calcRR();
 }
 
-function calcRR(){
-  const sl=parseFloat(document.getElementById('inp-sl').value);
-  const tp=parseFloat(document.getElementById('inp-tp').value);
-  const e=livePrice; const card=document.getElementById('rr-card');
-  if(!e||isNaN(sl)||isNaN(tp)){card.style.display='none';return null;}
-  const risk=Math.abs(e-sl),reward=Math.abs(e-tp);
-  if(risk===0){card.style.display='none';return null;}
-  const rr=(reward/risk).toFixed(2);
-  document.getElementById('rr-disp').textContent='1 : '+rr;
-  document.getElementById('rr-risk').textContent=risk.toFixed(priceDec);
-  document.getElementById('rr-reward').textContent=reward.toFixed(priceDec);
-  document.getElementById('rr-badge').innerHTML=parseFloat(rr)>=2?'<span class="pill-g">Good setup ✓</span>':'<span class="pill-gy">Low R/R — consider passing</span>';
-  card.style.display='block'; return rr;
+// ═══ R/R CALCULATOR ════════════════════════
+function calcRR() {
+  const sl = parseFloat(document.getElementById('inp-sl').value);
+  const tp = parseFloat(document.getElementById('inp-tp').value);
+  const e = livePrice;
+  const card = document.getElementById('rr-card');
+  if (!e || isNaN(sl) || isNaN(tp)) { card.style.display = 'none'; return null; }
+  const risk = Math.abs(e - sl);
+  const reward = Math.abs(e - tp);
+  if (risk === 0) { card.style.display = 'none'; return null; }
+  const rr = (reward / risk).toFixed(2);
+  document.getElementById('rr-disp').textContent = '1 : ' + rr;
+  document.getElementById('rr-risk').textContent = risk.toFixed(priceDec);
+  document.getElementById('rr-reward').textContent = reward.toFixed(priceDec);
+  document.getElementById('rr-badge').innerHTML = parseFloat(rr) >= 2
+    ? '<span class="pill-g">Good setup ✓</span>'
+    : '<span class="pill-gy">Low R/R — consider passing</span>';
+  card.style.display = 'block';
+  return rr;
 }
 
-function tryPublish(){
-  const sl=parseFloat(document.getElementById('inp-sl').value);
-  const tp=parseFloat(document.getElementById('inp-tp').value);
-  const e=livePrice;
-  ['inp-sl','inp-tp'].forEach(id=>document.getElementById(id).classList.remove('err'));
-  ['hint-sl','hint-tp'].forEach(id=>{const h=document.getElementById(id);h.classList.remove('err');});
-  if(!e){alert('Live price not loaded. Please wait.');return;}
-  let ok=true;
-  if(isNaN(sl)){showErr('inp-sl','hint-sl','Stop Loss is required');ok=false;}
-  else if(selDir==='BUY'&&sl>=e){showErr('inp-sl','hint-sl','SL must be BELOW entry for BUY');ok=false;}
-  else if(selDir==='SELL'&&sl<=e){showErr('inp-sl','hint-sl','SL must be ABOVE entry for SELL');ok=false;}
-  if(isNaN(tp)){showErr('inp-tp','hint-tp','Take Profit is required');ok=false;}
-  else if(selDir==='BUY'&&tp<=e){showErr('inp-tp','hint-tp','TP must be ABOVE entry for BUY');ok=false;}
-  else if(selDir==='SELL'&&tp>=e){showErr('inp-tp','hint-tp','TP must be BELOW entry for SELL');ok=false;}
-  if(!ok)return;
-  const rr=calcRR();
-  pending={pair:getPair(),dir:selDir,entry:e,sl,tp,rr:parseFloat(rr),dec:priceDec};
-  document.getElementById('conf-grid').innerHTML=[
-    ['Pair',pending.pair],['Direction',pending.dir],
-    ['Entry price',e.toFixed(priceDec)],['Stop Loss',sl.toFixed(priceDec)],
-    ['Take Profit',tp.toFixed(priceDec)],['Risk / Reward','1 : '+rr],
-  ].map(([l,v])=>`<div class="conf-cell"><div class="conf-l">${l}</div><div class="conf-v${v==='BUY'?' buy':v==='SELL'?' sell':''}">${v}</div></div>`).join('');
-  document.getElementById('modal').style.display='flex';
+// ═══ VALIDATION & PUBLISH ══════════════════
+function tryPublish() {
+  const sl = parseFloat(document.getElementById('inp-sl').value);
+  const tp = parseFloat(document.getElementById('inp-tp').value);
+  const e = livePrice;
+  ['inp-sl','inp-tp'].forEach(id => document.getElementById(id).classList.remove('err'));
+  ['hint-sl','hint-tp'].forEach(id => { const h = document.getElementById(id); h.classList.remove('err'); });
+
+  if (!e) { alert('Live price not loaded. Please wait.'); return; }
+  let ok = true;
+
+  if (isNaN(sl)) { showErr('inp-sl','hint-sl','Stop Loss is required'); ok=false; }
+  else if (selDir==='BUY' && sl >= e) { showErr('inp-sl','hint-sl','SL must be BELOW entry for BUY'); ok=false; }
+  else if (selDir==='SELL' && sl <= e) { showErr('inp-sl','hint-sl','SL must be ABOVE entry for SELL'); ok=false; }
+
+  if (isNaN(tp)) { showErr('inp-tp','hint-tp','Take Profit is required'); ok=false; }
+  else if (selDir==='BUY' && tp <= e) { showErr('inp-tp','hint-tp','TP must be ABOVE entry for BUY'); ok=false; }
+  else if (selDir==='SELL' && tp >= e) { showErr('inp-tp','hint-tp','TP must be BELOW entry for SELL'); ok=false; }
+
+  if (!ok) return;
+  const rr = calcRR();
+  pending = { pair: getPair(), dir: selDir, entry: e, sl, tp, rr: parseFloat(rr), dec: priceDec };
+
+  document.getElementById('conf-grid').innerHTML = [
+    ['Pair', pending.pair], ['Direction', pending.dir],
+    ['Entry price', e.toFixed(priceDec)],
+    ['Stop Loss', sl.toFixed(priceDec)],
+    ['Take Profit', tp.toFixed(priceDec)],
+    ['Risk / Reward', '1 : ' + rr],
+  ].map(([l,v]) => `<div class="conf-cell"><div class="conf-l">${l}</div><div class="conf-v${v==='BUY'?' buy':v==='SELL'?' sell':''}">${v}</div></div>`).join('');
+
+  document.getElementById('modal').style.display = 'flex';
 }
-function showErr(iid,hid,msg){
+
+function showErr(iid, hid, msg) {
   document.getElementById(iid).classList.add('err');
-  const h=document.getElementById(hid); h.textContent=msg; h.classList.add('err');
+  const h = document.getElementById(hid);
+  h.textContent = msg; h.classList.add('err');
 }
-function closeModal(){document.getElementById('modal').style.display='none';}
+function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
-function doPublish(){
+function doPublish() {
   closeModal();
-  const t={id:Date.now(),...pending,status:'OPEN',result:null,r:null,ts:new Date().toISOString()};
-  trades.unshift(t); localStorage.setItem(TS,JSON.stringify(trades));
-  document.getElementById('pf-wrap').style.display='none';
-  const s=document.getElementById('pub-suc'); s.style.display='block';
-  s.innerHTML=`<div class="suc-wrap"><div class="suc-card"><div class="suc-icon">✓</div><h2 class="suc-h">Trade published.</h2><p class="suc-p">Locked and added to your public record.</p><div class="suc-meta">${t.pair} ${t.dir}<br>Entry ${t.entry.toFixed(t.dec)} · SL ${t.sl.toFixed(t.dec)} · TP ${t.tp.toFixed(t.dec)}<br>Risk/Reward 1 : ${t.rr}</div><div class="lock-box"><strong>This trade is now locked forever.</strong><br>No edits, no deletions, no stop movement.</div><div class="suc-btns"><button class="btn-sec" onclick="resetPub()">Publish another</button><button class="btn-dk" onclick="showView('history')">View my trades</button></div></div></div>`;
-}
-function resetPub(){
-  document.getElementById('pf-wrap').style.display='grid';
-  document.getElementById('pub-suc').style.display='none';
-  document.getElementById('inp-sl').value='';
-  document.getElementById('inp-tp').value='';
-  document.getElementById('rr-card').style.display='none';
+  const t = {
+    id: Date.now(), ...pending,
+    status: 'OPEN', result: null, r: null,
+    ts: new Date().toISOString()
+  };
+  trades.unshift(t);
+  localStorage.setItem(TS, JSON.stringify(trades));
+
+  document.getElementById('pf-wrap').style.display = 'none';
+  const s = document.getElementById('pub-suc');
+  s.style.display = 'block';
+  s.innerHTML = `<div class="suc-wrap"><div class="suc-card">
+    <div class="suc-icon">✓</div>
+    <h2 class="suc-h">Trade published.</h2>
+    <p class="suc-p">Locked and added to your public record.</p>
+    <div class="suc-meta">${t.pair} ${t.dir}<br>Entry ${t.entry.toFixed(t.dec)} · SL ${t.sl.toFixed(t.dec)} · TP ${t.tp.toFixed(t.dec)}<br>Risk/Reward 1 : ${t.rr}</div>
+    <div class="lock-box"><strong>This trade is now locked forever.</strong><br>No edits, no deletions, no stop movement.</div>
+    <div class="suc-btns">
+      <button class="btn-sec" onclick="resetPub()">Publish another</button>
+      <button class="btn-dk" onclick="showView('history')">View my trades</button>
+    </div>
+  </div></div>`;
 }
 
-function fp(v,d){return typeof v==='number'?v.toFixed(d||4):'—';}
-function ago(iso){
-  if(!iso)return'—';
-  const m=Math.floor((Date.now()-new Date(iso).getTime())/60000);
-  if(m<1)return'just now'; if(m<60)return m+'m ago';
-  const h=Math.floor(m/60); if(h<24)return h+'h ago';
-  return Math.floor(h/24)+'d ago';
+function resetPub() {
+  document.getElementById('pf-wrap').style.display = 'grid';
+  document.getElementById('pub-suc').style.display = 'none';
+  document.getElementById('inp-sl').value = '';
+  document.getElementById('inp-tp').value = '';
+  document.getElementById('rr-card').style.display = 'none';
 }
 
-function buildTable(list,id,limit){
-  const wrap=document.getElementById(id);
-  const rows=limit?list.slice(0,limit):list;
-  if(rows.length===0){
-    wrap.innerHTML='<div class="empty-state"><div class="es-icon">📋</div><h3 class="es-h">No trades yet</h3><p class="es-p">Publish your first trade to start building your record.</p><button class="btn-dk" onclick="showView(\'publish\')">+ Publish Trade</button></div>';
+// ═══ TABLE BUILDER ═════════════════════════
+function fp(v, d) { return typeof v === 'number' ? v.toFixed(d || 5) : '—'; }
+function ago(iso) {
+  if (!iso) return '—';
+  const m = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return m + 'm ago';
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + 'h ago';
+  return Math.floor(h / 24) + 'd ago';
+}
+
+function buildTable(list, id, limit) {
+  const wrap = document.getElementById(id);
+  const rows = limit ? list.slice(0, limit) : list;
+  if (rows.length === 0) {
+    wrap.innerHTML = '<div class="empty-state"><div class="es-icon">📋</div><h3 class="es-h">No trades yet</h3><p class="es-p">Publish your first trade to start building your record.</p><button class="btn-dk" onclick="showView(\'publish\')">+ Publish Trade</button></div>';
     return;
   }
-  const head='<div class="tbl-head"><div class="tbl-h"></div><div class="tbl-h">Pair</div><div class="tbl-h">Entry</div><div class="tbl-h">SL / TP</div><div class="tbl-h">Status</div><div class="tbl-h r">R</div><div class="tbl-h r">Time</div></div>';
-  const body=rows.map(t=>{
-    const d=t.dec||4;
-    const dot=t.status==='OPEN'?'td-open':t.result==='TP'?'td-win':'td-loss';
-    const stc=t.status==='OPEN'?'ts-open':t.result==='TP'?'ts-tp':'ts-sl';
-    const stxt=t.status==='OPEN'?'Open':(t.result||'—');
-    const rc=t.r?(t.r.startsWith('+')?'tr-pos':'tr-neg'):'';
-    return`<div class="tbl-row"><div class="tdot ${dot}"></div><div class="t-pc"><span class="t-sym">${t.pair}</span><span class="t-dp ${t.dir==='BUY'?'t-buy':'t-sell'}">${t.dir}</span></div><div class="t-num">${fp(t.entry,d)}</div><div class="t-lv">SL <span>${fp(t.sl,d)}</span><br>TP <span>${fp(t.tp,d)}</span></div><div class="t-st ${stc}">${stxt}</div><div class="t-r ${rc}">${t.r||'—'}</div><div class="t-tm">${ago(t.ts)}</div></div>`;
+  const head = '<div class="tbl-head"><div class="tbl-h"></div><div class="tbl-h">Pair</div><div class="tbl-h">Entry</div><div class="tbl-h">SL / TP</div><div class="tbl-h">Status</div><div class="tbl-h r">R</div><div class="tbl-h r">Time</div></div>';
+  const body = rows.map(t => {
+    const d = t.dec || 5;
+    const dot = t.status==='OPEN' ? 'td-open' : t.result==='TP' ? 'td-win' : 'td-loss';
+    const stc = t.status==='OPEN' ? 'ts-open' : t.result==='TP' ? 'ts-tp' : 'ts-sl';
+    const stxt = t.status==='OPEN' ? 'Open' : (t.result || '—');
+    const rc = t.r ? (t.r.startsWith('+') ? 'tr-pos' : 'tr-neg') : '';
+    return `<div class="tbl-row"><div class="tdot ${dot}"></div><div class="t-pc"><span class="t-sym">${t.pair}</span><span class="t-dp ${t.dir==='BUY'?'t-buy':'t-sell'}">${t.dir}</span></div><div class="t-num">${fp(t.entry,d)}</div><div class="t-lv">SL <span>${fp(t.sl,d)}</span><br>TP <span>${fp(t.tp,d)}</span></div><div class="t-st ${stc}">${stxt}</div><div class="t-r ${rc}">${t.r||'—'}</div><div class="t-tm">${ago(t.ts)}</div></div>`;
   }).join('');
-  wrap.innerHTML=head+body;
+  wrap.innerHTML = head + body;
 }
 
-function refreshDash(){
-  const tot=trades.length;
-  const closed=trades.filter(t=>t.status==='CLOSED');
-  const wins=closed.filter(t=>t.result==='TP');
-  const open=trades.filter(t=>t.status==='OPEN').length;
-  const wr=closed.length>0?((wins.length/closed.length)*100).toFixed(0)+'%':'—';
-  const av=closed.length>0?(closed.reduce((s,t)=>s+(t.rr||0),0)/closed.length).toFixed(1):'—';
-  document.getElementById('d-tot').textContent=tot;
-  document.getElementById('d-tot').className='st-v'+(tot>0?'':' dim');
-  document.getElementById('d-open').textContent=open;
-  document.getElementById('d-wr').textContent=wr;
-  document.getElementById('d-wr').className='st-v'+(closed.length>0?' g':' dim');
-  document.getElementById('d-wrs').textContent=closed.length>0?`${wins.length}W · ${closed.length-wins.length}L`:'Publish to track';
-  document.getElementById('d-rrav').textContent=av;
-  document.getElementById('d-rrav').className='st-v'+(closed.length>0?'':' dim');
+// ═══ DASHBOARD STATS ═══════════════════════
+function refreshDash() {
+  const tot = trades.length;
+  const closed = trades.filter(t => t.status === 'CLOSED');
+  const wins = closed.filter(t => t.result === 'TP');
+  const open = trades.filter(t => t.status === 'OPEN').length;
+  const wr = closed.length > 0 ? ((wins.length / closed.length) * 100).toFixed(0) + '%' : '—';
+  const av = closed.length > 0 ? (closed.reduce((s,t) => s + (t.rr||0), 0) / closed.length).toFixed(1) : '—';
+
+  document.getElementById('d-tot').textContent = tot;
+  document.getElementById('d-tot').className = 'st-v' + (tot > 0 ? '' : ' dim');
+  document.getElementById('d-open').textContent = open;
+  document.getElementById('d-wr').textContent = wr;
+  document.getElementById('d-wr').className = 'st-v' + (closed.length > 0 ? ' g' : ' dim');
+  document.getElementById('d-wrs').textContent = closed.length > 0 ? `${wins.length}W · ${closed.length-wins.length}L` : 'Publish to track';
+  document.getElementById('d-rrav').textContent = av;
+  document.getElementById('d-rrav').className = 'st-v' + (closed.length > 0 ? '' : ' dim');
 }
 
-function showView(name){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
-  document.getElementById('view-'+name).classList.add('on');
-  document.getElementById('tab-'+name).classList.add('on');
-  if(name==='dashboard'){refreshDash();buildTable(trades,'dash-tbl',5);}
-  if(name==='history'){document.getElementById('hist-count').textContent=`${trades.length} trade${trades.length!==1?'s':''} · all locked · 0 edits`;buildTable(trades,'hist-tbl');}
-  if(name==='publish'){if(priceTimer)clearInterval(priceTimer);startRefresh();}
+// ═══ VIEW SWITCHER ══════════════════════════
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('view-' + name).classList.add('on');
+  document.getElementById('tab-' + name).classList.add('on');
+
+  if (name === 'dashboard') { refreshDash(); buildTable(trades, 'dash-tbl', 5); }
+  if (name === 'history') {
+    document.getElementById('hist-count').textContent = `${trades.length} trade${trades.length !== 1 ? 's' : ''} · all locked · 0 edits`;
+    buildTable(trades, 'hist-tbl');
+  }
+  if (name === 'publish') {
+    restartPriceFetch();
+  }
 }
 
+// ═══ INIT ══════════════════════════════════
 setDir('BUY');
+// Set initial step/placeholder for XAU/USD
+document.getElementById('inp-sl').step = '0.01';
+document.getElementById('inp-sl').placeholder = '0.00';
+document.getElementById('inp-tp').step = '0.01';
+document.getElementById('inp-tp').placeholder = '0.00';
 refreshDash();
-buildTable(trades,'dash-tbl',5);
+buildTable(trades, 'dash-tbl', 5);
 </script>
 </body>
 </html>
