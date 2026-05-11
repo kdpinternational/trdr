@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DOSSIER — The Official Record of Verified Traders</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:  #111827;
+  --blue:  #1d4ed8;
+  --blue2: #1e40af;
+  --bg:    #ffffff;
+  --bg2:   #f9f9f8;
+  --bg3:   #f0f0ee;
+  --bdr:   #e5e5e1;
+  --bdr2:  #c8c8c4;
+  --text:  #050505;
+  --t2:    #3f3f3c;
+  --t3:    #8f8f8c;
+  --gray-h:#a0a09c;
+  --grn:   #1d4ed8;
+  --red:   #b91c1c;
+  --mono:  'IBM Plex Mono',monospace;
+  --sans:  'IBM Plex Sans',sans-serif;
+  --disp:  'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* ═══ NAV ═══════════════════════════════════════════════ */
+.nav{
+  background:#0c0c0c;position:sticky;top:0;z-index:200;
+  height:56px;display:flex;align-items:stretch;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-brand{
+  display:flex;align-items:center;
+  padding:0 28px;border-right:1px solid rgba(255,255,255,0.1);
+  flex-shrink:0;
+}
+.nav-links{display:flex;align-items:stretch;list-style:none;height:100%}
+.nav-links li{display:flex;height:100%}
+.nav-links a{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);text-decoration:none;
+  padding:0 18px;display:flex;align-items:center;height:100%;
+  border-right:1px solid rgba(255,255,255,0.07);
+  transition:color .1s,background .1s;
+}
+.nav-links li:first-child a{border-left:1px solid rgba(255,255,255,0.07)}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.04)}
+.nav-links a.on{color:rgba(255,255,255,0.9)}
+.nav-right{margin-left:auto;display:flex;align-items:stretch}
+.nav-login{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.38);text-decoration:none;
+  padding:0 22px;display:flex;align-items:center;
+  border-left:1px solid rgba(255,255,255,0.07);
+  transition:color .1s;
+}
+.nav-login:hover{color:rgba(255,255,255,0.7)}
+.nav-cta{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--blue);color:#fff;
+  padding:0 26px;display:flex;align-items:center;
+  text-decoration:none;white-space:nowrap;
+  transition:background .1s;border-left:1px solid rgba(255,255,255,0.07);
+}
+.nav-cta:hover{background:var(--blue2)}
+
+/* ═══ STRIP ══════════════════════════════════════════════ */
+.strip{
+  background:#fff;border-bottom:1px solid var(--bdr);
+  height:38px;display:flex;align-items:center;
+}
+.strip-in{
+  display:flex;align-items:center;width:100%;padding:0 28px;gap:0;
+}
+.si{
+  font-family:var(--mono);font-size:10.5px;color:var(--t3);
+  display:flex;align-items:center;gap:8px;
+  padding-right:22px;margin-right:22px;
+  border-right:1px solid var(--bdr);white-space:nowrap;
+}
+.si:first-child{gap:7px}
+.siv{font-weight:600;color:var(--t2)}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#22c55e;flex-shrink:0;
+  animation:bl 1.9s ease infinite;
+}
+@keyframes bl{0%,100%{opacity:1}55%{opacity:.25}}
+.strip-quote{
+  margin-left:auto;font-family:var(--sans);font-size:12px;
+  color:var(--t3);white-space:nowrap;
+}
+
+/* ═══ HERO ═══════════════════════════════════════════════ */
+.hero{
+  display:grid;grid-template-columns:46% 54%;
+  height:calc(100vh - 94px);
+  border-bottom:2px solid var(--bdr);
+  overflow:hidden;
+}
+
+/* LEFT */
+.hl{
+  background:#fff;border-right:1px solid var(--bdr);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.hl-top{
+  flex:1;padding:32px 40px 28px;
+  display:flex;flex-direction:column;
+  min-height:0;
+}
+.hl-label{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:22px;flex-shrink:0;
+}
+.hl-label-txt{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:0.12em;color:var(--text);
+}
+.hl-label-line{
+  flex:1;max-width:52px;height:1px;background:var(--text);
+}
+.hl-h1{
+  font-family:var(--disp);font-size:clamp(52px,5.8vw,82px);
+  font-weight:900;line-height:1.0;letter-spacing:-0.035em;
+  color:var(--text);margin-bottom:0;flex-shrink:0;
+}
+.hl-h2{
+  font-family:var(--disp);font-size:clamp(52px,5.8vw,82px);
+  font-weight:900;line-height:1.0;letter-spacing:-0.035em;
+  color:var(--gray-h);margin-bottom:18px;flex-shrink:0;
+}
+.hl-rule{
+  border:none;border-top:1px solid var(--bdr);
+  margin-bottom:18px;flex-shrink:0;
+}
+.hl-desc{
+  font-family:var(--mono);font-size:12.5px;
+  color:var(--t2);line-height:1.72;
+  margin-bottom:24px;flex-shrink:0;max-width:400px;
+}
+.hl-actions{
+  display:flex;align-items:center;gap:24px;flex-shrink:0;
+}
+.btn-reg{
+  background:var(--navy);color:#fff;
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:14px 22px;text-decoration:none;
+  display:inline-flex;align-items:center;
+  transition:background .1s;white-space:nowrap;
+}
+.btn-reg:hover{background:var(--blue2)}
+.btn-exp{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--t2);text-decoration:none;
+  display:flex;align-items:center;gap:6px;transition:color .1s;
+}
+.btn-exp:hover{color:var(--text)}
+
+/* 4 feature cards at bottom */
+.hl-feats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--bdr);flex-shrink:0;
+}
+.feat{
+  padding:14px 14px 16px;border-right:1px solid var(--bdr);
+}
+.feat:last-child{border-right:none}
+.feat-icon{color:var(--navy);margin-bottom:7px}
+.feat-title{
+  font-family:var(--mono);font-size:8px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--text);margin-bottom:5px;
+}
+.feat-desc{
+  font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.55;
+}
+
+/* RIGHT */
+.hr2{
+  background:#fafaf8;display:flex;flex-direction:column;overflow:hidden;
+}
+.hr2-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;border-bottom:1px solid var(--bdr);flex-shrink:0;
+  background:#fff;
+}
+.hr2-lbl{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--text);
+  display:flex;align-items:center;gap:9px;
+}
+.hr2-view{
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--blue);text-decoration:none;
+}
+/* tabs */
+.hr2-tabs{
+  display:flex;align-items:center;padding:10px 24px;
+  border-bottom:1px solid var(--bdr);flex-shrink:0;
+  background:#fff;gap:0;
+}
+.htab{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;
+  letter-spacing:0.07em;text-transform:uppercase;
+  padding:7px 16px;border:1px solid var(--bdr);
+  background:transparent;color:var(--t3);
+  cursor:pointer;transition:all .1s;margin-right:-1px;position:relative;
+}
+.htab.on{background:var(--navy);color:#fff;border-color:var(--navy);z-index:1}
+.htab:hover:not(.on){background:var(--bg3);color:var(--t2)}
+.hmkt{
+  margin-left:auto;font-family:var(--mono);font-size:10.5px;
+  color:var(--t3);background:#fff;border:1px solid var(--bdr);
+  padding:7px 14px;cursor:pointer;
+}
+
+/* leaderboard table */
+.hr2-wrap{flex:1;overflow-y:auto}
+.lbt{width:100%;border-collapse:collapse}
+.lbt thead{position:sticky;top:0;z-index:5}
+.lbt thead tr{background:var(--bg3);border-bottom:1px solid var(--bdr2)}
+.lbt thead th{
+  padding:8px 16px;font-family:var(--mono);font-size:8.5px;
+  font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--t3);text-align:left;white-space:nowrap;
+  border-right:1px solid var(--bdr);
+}
+.lbt thead th:last-child{border-right:none}
+.lbt thead th.ths{color:var(--navy)}
+.lbt tbody tr{border-bottom:1px solid var(--bdr);cursor:pointer;transition:background .06s}
+.lbt tbody tr:hover{background:#eef2ff}
+.lbt tbody td{
+  padding:0 16px;height:56px;
+  font-size:12px;color:var(--t2);vertical-align:middle;
+  white-space:nowrap;border-right:1px solid var(--bdr);
+}
+.lbt tbody td:last-child{border-right:none}
+.lbt tbody tr:nth-child(1) td{height:62px}
+
+/* rank cell */
+.rk{display:flex;align-items:center;gap:4px}
+.rk-n{
+  font-family:var(--mono);font-weight:600;
+  color:var(--text);min-width:18px;
+}
+.rk-1 .rk-n{font-size:20px}
+.rk-2 .rk-n{font-size:16px}
+.rk-3 .rk-n{font-size:14px}
+.rk-n-def{font-size:13px}
+.rk-mv{font-family:var(--mono);font-size:9px;font-weight:600}
+.up{color:var(--grn)} .dn{color:var(--red)} .fl{color:var(--t3)}
+
+/* trader cell */
+.tr-wrap{display:flex;align-items:center;gap:0}
+.tr-nm{
+  font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--text);
+}
+.tr-bdg{
+  font-family:var(--mono);font-size:7px;font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:2px 5px;border:1px solid rgba(24,69,186,0.38);
+  color:var(--blue);margin-left:9px;
+}
+/* score */
+.rs{
+  font-family:var(--mono);font-weight:600;color:var(--blue);
+}
+.rs-1{font-size:28px}
+.rs-2{font-size:22px}
+.rs-3{font-size:20px}
+.rs-def{font-size:18px}
+/* data cells */
+.lm{font-family:var(--mono);font-size:12.5px;color:var(--t2);font-weight:500}
+.ld{font-family:var(--mono);font-size:11px;color:var(--t3)}
+.g{color:var(--blue)} .r{color:var(--red)}
+/* status */
+.st-e{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:0.05em;color:var(--blue);
+}
+.st-p{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:0.04em;color:var(--t3);
+}
+/* table foot */
+.hr2-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 24px;border-top:1px solid var(--bdr);
+  font-family:var(--mono);font-size:9.5px;color:var(--t3);
+  flex-shrink:0;background:#fff;
+}
+
+/* ═══ RECOVERY SCORE ══════════════════════════════════════ */
+.rsf{padding:72px 32px;background:#1e1e1e;border-bottom:1px solid rgba(255,255,255,0.07)}
+.rsf-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:88px;align-items:center}
+.rsf-l{text-align:center}
+.rsf-tag{
+  font-family:var(--mono);font-size:9px;font-weight:600;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);margin-bottom:10px;
+}
+.rsf-num{
+  font-family:var(--mono);font-size:96px;font-weight:600;
+  color:#fff;line-height:1;letter-spacing:-0.04em;
+}
+.rsf-lbl{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);margin-top:8px;
+}
+.rsf-eq{
+  font-family:var(--mono);font-size:12px;
+  color:rgba(255,255,255,0.22);margin-top:10px;
+}
+.rsf-eq span{color:rgba(255,255,255,0.52)}
+.rsf-h{
+  font-family:var(--disp);font-size:40px;font-weight:900;
+  letter-spacing:-0.035em;color:#fff;line-height:1.05;margin-bottom:14px;
+}
+.rsf-body{
+  font-size:13.5px;color:rgba(255,255,255,0.45);line-height:1.75;
+  font-weight:300;margin-bottom:28px;max-width:460px;
+}
+.rsf-body strong{color:rgba(255,255,255,0.75);font-weight:400}
+.tiers{border:1px solid rgba(255,255,255,0.08)}
+.tier{
+  display:grid;grid-template-columns:90px 80px 1fr;
+  align-items:center;padding:12px 18px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.tier:last-child{border-bottom:none}
+.tier-l{font-family:var(--mono);font-size:11px;font-weight:600}
+.tier-s{font-family:var(--mono);font-size:14px;font-weight:600}
+.tier-pc{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.22)}
+.t-e{background:rgba(255,255,255,0.03)}
+.t-e .tier-l{color:#fff} .t-e .tier-s{color:rgba(255,255,255,0.88)}
+.t-p .tier-l{color:rgba(255,255,255,0.5)} .t-p .tier-s{color:rgba(255,255,255,0.42)}
+.t-r .tier-l{color:rgba(255,255,255,0.28)} .t-r .tier-s{color:rgba(255,255,255,0.22)}
+
+/* ═══ PROFILE PREVIEW ═════════════════════════════════════ */
+.preview{padding:64px 32px;background:var(--bg2);border-bottom:1px solid var(--bdr)}
+.prev-in{max-width:1200px;margin:0 auto}
+
+/* ═══ shared section header ═══ */
+.sec-k{
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:6px;display:block;
+}
+.sec-h{
+  font-family:var(--disp);font-size:38px;font-weight:900;
+  letter-spacing:-0.035em;color:var(--text);
+  margin-bottom:6px;line-height:1.05;
+}
+.sec-sub{
+  font-size:13px;color:var(--t2);font-weight:300;
+  line-height:1.68;margin-bottom:22px;max-width:560px;
+}
+
+/* profile frame */
+.pframe{border:1px solid var(--bdr2);background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.06)}
+.pfbar{
+  background:var(--bg3);border-bottom:1px solid var(--bdr);
+  padding:7px 12px;display:flex;align-items:center;gap:5px;
+}
+.pdot{width:9px;height:9px;border-radius:50%}
+.pdr{background:#ff5f57}.pdy{background:#febc2e}.pdg{background:#28c840}
+.purl{
+  flex:1;margin:0 10px;background:#fff;border:1px solid var(--bdr);
+  padding:3px 10px;font-family:var(--mono);font-size:10px;color:var(--t3);text-align:center;
+}
+.ph{
+  padding:14px 20px 12px;border-bottom:1px solid var(--bdr);
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;
+}
+.ph-id{
+  font-family:var(--sans);font-size:17px;font-weight:600;color:var(--text);
+  display:flex;align-items:center;gap:8px;
+}
+.ph-sub{font-family:var(--mono);font-size:9px;color:var(--t3);margin-top:3px}
+.ph-sb{text-align:right}
+.ph-sl{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--t3);margin-bottom:1px;
+}
+.ph-sc{font-family:var(--mono);font-size:40px;font-weight:600;color:var(--blue);line-height:1}
+.ph-rk{font-family:var(--mono);font-size:10px;color:var(--t3)}
+.pstats{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--bdr)}
+.ps{padding:10px 14px;border-right:1px solid var(--bdr)}
+.ps:last-child{border-right:none}
+.ps-l{
+  font-family:var(--mono);font-size:8px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);margin-bottom:4px;
+}
+.ps-v{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--text)}
+.log-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:7px 14px;background:var(--bg2);border-bottom:1px solid var(--bdr);
+}
+.log-t{
+  font-family:var(--mono);font-size:9px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--t2);
+}
+.log-tabs{display:flex;gap:2px}
+.ltab{
+  font-family:var(--mono);font-size:8.5px;font-weight:600;
+  padding:3px 9px;border:1px solid var(--bdr);background:transparent;color:var(--t3);cursor:pointer;
+}
+.ltab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.ttbl{width:100%;border-collapse:collapse;font-family:var(--mono)}
+.ttbl thead tr{background:var(--bg3)}
+.ttbl thead th{
+  padding:5px 10px;font-size:8px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--t3);text-align:left;border-bottom:1px solid var(--bdr);border-right:1px solid var(--bdr);
+}
+.ttbl thead th:last-child{border-right:none}
+.ttbl tbody tr{border-bottom:1px solid var(--bdr)}
+.ttbl tbody tr:hover{background:#f4f7ff}
+.ttbl tbody td{padding:6px 10px;font-size:11px;color:var(--t2);border-right:1px solid var(--bdr)}
+.ttbl tbody td:last-child{border-right:none}
+.tph{color:var(--blue);font-weight:600} .tsl{color:var(--red);font-weight:600}
+.trp{color:var(--blue);font-weight:600} .trn{color:var(--red);font-weight:600}
+.tln{color:var(--blue)} .tsh{color:var(--red)}
+.analytics{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--bdr)}
+.an{padding:12px 14px;border-right:1px solid var(--bdr)}
+.an:last-child{border-right:none}
+.an-t{
+  font-family:var(--mono);font-size:8px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;
+}
+.an-r{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid var(--bdr);font-family:var(--mono);font-size:11px}
+.an-r:last-child{border-bottom:none}
+.an-m{color:var(--t2);min-width:58px}
+.an-b{flex:1;height:3px;background:var(--bg3)}
+.an-bv{height:100%;background:var(--navy)}
+.an-bv.best{background:var(--blue)}
+.an-s{display:flex;gap:10px}
+.an-sv{color:var(--t3);white-space:nowrap;font-size:10.5px}
+.an-sv.best{color:var(--blue)}
+.mo-r{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid var(--bdr);font-family:var(--mono);font-size:11px}
+.mo-r:last-child{border-bottom:none}
+.mo-m{color:var(--t2);min-width:66px;font-size:10.5px}
+.mo-v{color:var(--blue);font-weight:600;min-width:44px}
+.mo-b{flex:1;height:3px;background:var(--bg3)}
+.mo-bv{height:100%;background:var(--blue)}
+
+/* ═══ VERIFICATION ════════════════════════════════════════ */
+.verf{padding:64px 32px;border-bottom:1px solid var(--bdr)}
+.verf-in{max-width:1200px;margin:0 auto}
+.verf-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--bdr);border:1px solid var(--bdr);margin-top:20px;
+}
+.vp{background:#fff}
+.vp-head{
+  padding:9px 16px;background:var(--bg3);border-bottom:1px solid var(--bdr);
+  font-family:var(--mono);font-size:9px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.vp-ok{color:var(--blue);font-weight:600}
+.vp-lk{color:var(--red);font-weight:600}
+.vp-row{display:flex;align-items:baseline;padding:7px 16px;border-bottom:1px solid var(--bdr);font-size:11px}
+.vp-row:last-child{border-bottom:none}
+.vp-k{color:var(--t3);min-width:148px;font-family:var(--mono);font-size:10.5px}
+.vp-v{color:var(--text);font-weight:500;font-family:var(--mono);font-size:11px;flex:1}
+.vp-v.ok{color:var(--grn)}
+.vp-v.hash{font-size:9.5px;color:var(--t3);font-weight:400;word-break:break-all}
+.vp-notice{
+  margin:10px 16px 12px;background:var(--bg2);border:1px solid var(--bdr);
+  padding:8px 12px;font-family:var(--mono);font-size:10px;color:var(--t3);
+  display:flex;align-items:flex-start;gap:7px;line-height:1.5;
+}
+.vp-notice::before{content:'🔒';font-size:11px;flex-shrink:0}
+
+/* ═══ RULES ═══════════════════════════════════════════════ */
+.rules{padding:64px 32px;background:var(--bg2);border-bottom:1px solid var(--bdr)}
+.rules-in{max-width:1200px;margin:0 auto}
+.rules-top{display:grid;grid-template-columns:340px 1fr;gap:48px;margin-bottom:22px;align-items:end}
+.rules-lead{font-size:13px;color:var(--t2);line-height:1.7;font-weight:300}
+.rtbl{width:100%;border-collapse:collapse;border:1px solid var(--bdr)}
+.rtbl tr{border-bottom:1px solid var(--bdr)}
+.rtbl tr:last-child{border-bottom:none}
+.rtbl td{padding:16px 18px;font-size:13px;vertical-align:top;border-right:1px solid var(--bdr)}
+.rtbl td:last-child{border-right:none}
+.rnum{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--navy);min-width:46px}
+.rtitle{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.rtext{font-size:12.5px;color:var(--t2);line-height:1.65;font-weight:300}
+.rtext strong{font-weight:500;color:var(--text)}
+
+/* ═══ WHO ════════════════════════════════════════════════ */
+.who{padding:64px 32px;background:var(--bg);border-bottom:1px solid var(--bdr)}
+.who-in{max-width:1200px;margin:0 auto}
+.who-top{display:grid;grid-template-columns:340px 1fr;gap:48px;margin-bottom:22px;align-items:end}
+.who-hh{
+  font-family:var(--disp);font-size:38px;font-weight:900;
+  letter-spacing:-0.035em;color:var(--text);line-height:1.05;
+}
+.who-lead{font-size:13px;color:var(--t2);line-height:1.7;font-weight:300}
+.who-tbl{width:100%;border-collapse:collapse;border:1px solid var(--bdr)}
+.who-tbl tr{border-bottom:1px solid var(--bdr)}
+.who-tbl tr:last-child{border-bottom:none}
+.who-tbl td{padding:16px 18px;font-size:13px;vertical-align:top;border-right:1px solid var(--bdr)}
+.who-tbl td:last-child{border-right:none}
+.who-verdict{
+  font-family:var(--mono);font-size:9px;font-weight:600;
+  letter-spacing:0.16em;text-transform:uppercase;
+  white-space:nowrap;min-width:110px;padding-top:18px!important;
+}
+.who-verdict.out{color:var(--red)}
+.who-verdict.in{color:var(--blue)}
+.who-tbl-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px}
+.who-tbl-text{font-size:12.5px;color:var(--t2);line-height:1.65;font-weight:300}
+.who-tbl-text strong{font-weight:500;color:var(--text)}
+.who-tbl tr.in-row{background:#f4f7ff}
+.who-tbl tr.in-row td:first-child{border-left:3px solid var(--blue)}
+
+/* ═══ CTA ════════════════════════════════════════════════ */
+.cta{padding:56px 32px}
+.cta-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+.cta-h{
+  font-family:var(--disp);font-size:38px;font-weight:900;
+  letter-spacing:-0.035em;margin-bottom:7px;line-height:1.05;
+}
+.cta-sub{font-size:13px;color:var(--t2);font-weight:300;line-height:1.68}
+.cta-r{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.cta-note{font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:0.04em}
+.btn-p{
+  background:var(--navy);color:#fff;font-family:var(--mono);
+  font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  padding:14px 28px;border:none;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;white-space:nowrap;transition:background .1s;
+}
+.btn-p:hover{background:var(--blue2)}
+
+/* ═══ FOOTER ═════════════════════════════════════════════ */
+footer{background:var(--navy);padding:30px 32px;border-top:1px solid rgba(255,255,255,0.06)}
+.ftr{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto auto;gap:48px;align-items:center}
+.ftr-logo{
+  font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:0.2em;
+  color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:9px;margin-bottom:3px;
+}
+.ftr-tag{font-size:11px;color:rgba(255,255,255,0.24)}
+.ftr-line{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.14);margin-top:5px;font-style:italic}
+.ftr-links{display:flex;gap:20px}
+.ftr-links a{font-size:11px;color:rgba(255,255,255,0.28);text-decoration:none;transition:color .1s}
+.ftr-links a:hover{color:rgba(255,255,255,0.62)}
+.ftr-copy{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.16);text-align:right}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <svg width="120" height="20" viewBox="0 0 120 20" style="display:block;flex-shrink:0">
+      <text x="0" y="16" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;letter-spacing:0.2em;fill:#ffffff">DOSSIER</text>
+      <rect x="68" y="3" width="50" height="14" fill="#ffffff"/>
+    </svg>
+  </div>
+  <ul class="nav-links">
+    <li><a href="dossier_leaderboard.html" class="on">Rankings</a></li>
+    <li><a href="dossier_leaderboard.html">Verification</a></li>
+    <li><a href="#score">Methodology</a></li>
+    <li><a href="dossier_leaderboard.html">Leaderboard</a></li>
+    <li><a href="#rules">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-login">Log In</a>
+    <a href="#" class="nav-cta">Register Your Record</a>
+  </div>
+</nav>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-in">
+    <div class="si"><span class="dot"></span><span>Live</span></div>
+    <div class="si"><span>Verified Trades:</span><span class="siv">1,392,817</span></div>
+    <div class="si"><span>Traders:</span><span class="siv">18,764</span></div>
+    <div class="si"><span>Markets:</span><span class="siv">Forex · Gold · Silver</span></div>
+    <span class="strip-quote">The leaderboard reflects exactly who the best traders are — not who tells the best story.</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+
+  <!-- LEFT -->
+  <div class="hl">
+    <div class="hl-top">
+      <div class="hl-label">
+        <span class="hl-label-txt">DOSSIER</span>
+        <span class="hl-label-line"></span>
+      </div>
+      <div class="hl-h1">DOSSIER is<br>for traders.</div>
+      <div class="hl-h2">Reputation is<br>for everyone else.</div>
+      <hr class="hl-rule">
+      <p class="hl-desc">A public ranking system built on verified<br>trading records, recovery consistency,<br>and permanent performance history.</p>
+      <div class="hl-actions">
+        <a href="#" class="btn-reg">Register Your Record</a>
+        <a href="#hero" class="btn-exp">Explore Leaderboard →</a>
+      </div>
+    </div>
+
+    <div class="hl-feats">
+      <div class="feat">
+        <div class="feat-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 2L3 5.5v5.5c0 3.75 3 7.2 7 8.2 4-1 7-4.45 7-8.2V5.5L10 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+            <polyline points="7,10 9,12 13,8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="feat-title">Verified Trades</div>
+        <div class="feat-desc">Every entry is price-verified and time-stamped.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="4" y="9" width="12" height="9" rx="1" stroke="currentColor" stroke-width="1.4" fill="none"/>
+            <path d="M7 9V6.5a3 3 0 016 0V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <circle cx="10" cy="13.5" r="1" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="feat-title">Immutable Records</div>
+        <div class="feat-desc">Once registered, a trade cannot be changed.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="3" y="13" width="3" height="4" rx="0.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+            <rect x="8.5" y="9" width="3" height="8" rx="0.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+            <rect x="14" y="5" width="3" height="12" rx="0.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+          </svg>
+        </div>
+        <div class="feat-title">Objective Formula</div>
+        <div class="feat-desc">Recovery Score is calculated, not subjective.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+            <ellipse cx="10" cy="10" rx="3" ry="7.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+            <line x1="2.5" y1="10" x2="17.5" y2="10" stroke="currentColor" stroke-width="1.4"/>
+          </svg>
+        </div>
+        <div class="feat-title">Public &amp; Transparent</div>
+        <div class="feat-desc">The results are public. The standard is the same for all.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: leaderboard -->
+  <div class="hr2">
+    <div class="hr2-head">
+      <span class="hr2-lbl"><span class="dot"></span>Live Leaderboard</span>
+      <a href="dossier_leaderboard.html" class="hr2-view">View All →</a>
+    </div>
+    <div class="hr2-tabs">
+      <button class="htab on">All Time</button>
+      <button class="htab">Monthly</button>
+      <button class="htab">Weekly</button>
+      <button class="htab">Daily</button>
+      <select class="hmkt"><option>All Markets</option><option>Forex</option><option>Gold / Silver</option></select>
+    </div>
+    <div class="hr2-wrap">
+      <table class="lbt">
+        <thead>
+          <tr>
+            <th style="width:72px">#</th>
+            <th>Trader</th>
+            <th class="ths">Recovery Score ↓</th>
+            <th>Total Recovery</th>
+            <th>Drawdown</th>
+            <th>R:R</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="rk rk-1"><span class="rk-n">1</span><span class="rk-mv up">↑2</span></div></td>
+            <td><div class="tr-wrap"><span class="tr-nm">Alex Mercer</span><span class="tr-bdg">Elite</span></div></td>
+            <td><span class="rs rs-1">92.4</span></td>
+            <td><span class="lm">+41.2R</span></td>
+            <td><span class="lm g">-3.1R</span></td>
+            <td><span class="lm">2.87</span></td>
+            <td><span class="st-e">ELITE</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk rk-2"><span class="rk-n">2</span><span class="rk-mv dn">↓1</span></div></td>
+            <td><div class="tr-wrap"><span class="tr-nm">Kaito Nakamura</span><span class="tr-bdg">Elite</span></div></td>
+            <td><span class="rs rs-2">89.7</span></td>
+            <td><span class="lm">+38.6R</span></td>
+            <td><span class="lm g">-2.8R</span></td>
+            <td><span class="lm">2.31</span></td>
+            <td><span class="st-e">ELITE</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk rk-3"><span class="rk-n">3</span><span class="rk-mv fl">—</span></div></td>
+            <td><div class="tr-wrap"><span class="tr-nm">Michael Zhang</span><span class="tr-bdg">Elite</span></div></td>
+            <td><span class="rs rs-3">87.1</span></td>
+            <td><span class="lm">+33.4R</span></td>
+            <td><span class="lm g">-2.5R</span></td>
+            <td><span class="lm">2.14</span></td>
+            <td><span class="st-e">ELITE</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk"><span class="rk-n rk-n-def">4</span><span class="rk-mv up">↑5</span></div></td>
+            <td><span class="tr-nm">Arjun Patel</span></td>
+            <td><span class="rs rs-def">83.6</span></td>
+            <td><span class="lm">+29.7R</span></td>
+            <td><span class="lm g">-2.3R</span></td>
+            <td><span class="lm">1.98</span></td>
+            <td><span class="st-p">PRO</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk"><span class="rk-n rk-n-def">5</span><span class="rk-mv up">↑1</span></div></td>
+            <td><span class="tr-nm">Diego Martinez</span></td>
+            <td><span class="rs rs-def">81.3</span></td>
+            <td><span class="lm">+27.9R</span></td>
+            <td><span class="lm g">-2.1R</span></td>
+            <td><span class="lm">1.85</span></td>
+            <td><span class="st-p">PRO</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk"><span class="rk-n rk-n-def">6</span><span class="rk-mv dn">↓3</span></div></td>
+            <td><span class="tr-nm">James Wilson</span></td>
+            <td><span class="rs rs-def">79.8</span></td>
+            <td><span class="lm">+26.1R</span></td>
+            <td><span class="lm r">-2.0R</span></td>
+            <td><span class="lm">1.72</span></td>
+            <td><span class="st-p">PRO</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk"><span class="rk-n rk-n-def">7</span><span class="rk-mv fl">—</span></div></td>
+            <td><span class="tr-nm">Ethan Collins</span></td>
+            <td><span class="rs rs-def">76.4</span></td>
+            <td><span class="lm">+22.8R</span></td>
+            <td><span class="lm g">-1.9R</span></td>
+            <td><span class="lm">1.63</span></td>
+            <td><span class="st-p">PRO</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk"><span class="rk-n rk-n-def">8</span><span class="rk-mv up">↑4</span></div></td>
+            <td><span class="tr-nm">Yuki Tanaka</span></td>
+            <td><span class="rs rs-def">74.2</span></td>
+            <td><span class="lm">+21.4R</span></td>
+            <td><span class="lm g">-1.8R</span></td>
+            <td><span class="lm">1.59</span></td>
+            <td><span class="st-p">PRO</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk"><span class="rk-n rk-n-def">9</span><span class="rk-mv dn">↓2</span></div></td>
+            <td><span class="tr-nm">Sofia Russo</span></td>
+            <td><span class="rs rs-def">72.1</span></td>
+            <td><span class="lm">+19.6R</span></td>
+            <td><span class="lm g">-1.7R</span></td>
+            <td><span class="lm">1.48</span></td>
+            <td><span class="st-p">PRO</span></td>
+          </tr>
+          <tr>
+            <td><div class="rk"><span class="rk-n rk-n-def">10</span><span class="rk-mv fl">—</span></div></td>
+            <td><span class="tr-nm">David Anderson</span></td>
+            <td><span class="rs rs-def">69.3</span></td>
+            <td><span class="lm">+18.2R</span></td>
+            <td><span class="lm g">-1.6R</span></td>
+            <td><span class="lm">1.41</span></td>
+            <td><span class="st-p">PRO</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hr2-foot">
+      <span><span class="dot" style="width:5px;height:5px;border-radius:50%;background:#22c55e;display:inline-block;margin-right:7px;vertical-align:middle"></span>Last Update: 12:46:18 UTC</span>
+      <span>Rankings update every 60 seconds</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- RECOVERY SCORE -->
+<section class="rsf" id="score">
+  <div class="rsf-in">
+    <div class="rsf-l">
+      <div class="rsf-tag">Primary Ranking Metric</div>
+      <div class="rsf-num">92.4</div>
+      <div class="rsf-lbl">Recovery Score</div>
+      <div class="rsf-eq">= <span>41.2 R</span> ÷ <span>3.1 R</span></div>
+    </div>
+    <div>
+      <div class="rsf-h">One number.<br>Your entire career,<br>compressed.</div>
+      <div class="rsf-body">Total R:R collected divided by your maximum drawdown.
+        How you choose your stop loss and take profit —
+        <strong>every time, for every trade</strong> — is what determines it.
+        It grows with discipline. It falls with recklessness.</div>
+      <div class="tiers">
+        <div class="tier t-e"><span class="tier-l">Elite</span><span class="tier-s">≥ 87.0</span><span class="tier-pc">Top 1.8% · 91 traders</span></div>
+        <div class="tier t-p"><span class="tier-l">Pro</span><span class="tier-s">≥ 50.0</span><span class="tier-pc">Top 18.4% · 523 traders</span></div>
+        <div class="tier t-r"><span class="tier-l">Ranked</span><span class="tier-s">≥ 1.0</span><span class="tier-pc">Active public record</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="preview" id="profile">
+  <div class="prev-in">
+    <span class="sec-k">System Report · Trader Profile</span>
+    <div class="sec-h">This is what you see when you log in.</div>
+    <p class="sec-sub">Submit entry, SL, and TP. The system validates the live price, auto-calculates R:R, and locks the trade. No editing, no exceptions.</p>
+    <div class="pframe">
+      <div style="background:var(--bg3);border-bottom:1px solid var(--bdr);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3)">Trader Profile</span>
+        <span style="font-family:var(--mono);font-size:9px;color:var(--t3)">dossier.io/profile/alex-mercer</span>
+      </div>
+      <div class="ph">
+        <div>
+          <div class="ph-id">Alex Mercer <span class="tr-bdg" style="font-size:8px">Elite</span></div>
+          <div class="ph-sub">#1 Global · Member since Jan 2023 · 847 trades · Forex, Indices</div>
+        </div>
+        <div class="ph-sb">
+          <div class="ph-sl">Recovery Score</div>
+          <div class="ph-sc">92.4</div>
+          <div class="ph-rk">Rank #1 of 18,764</div>
+        </div>
+      </div>
+      <div class="pstats">
+        <div class="ps"><div class="ps-l">Total Recovery</div><div class="ps-v g">+41.2 R</div></div>
+        <div class="ps"><div class="ps-l">Trades</div><div class="ps-v">847</div></div>
+        <div class="ps"><div class="ps-l">Win Rate</div><div class="ps-v">72.3%</div></div>
+        <div class="ps"><div class="ps-l">Avg R:R</div><div class="ps-v">2.87</div></div>
+        <div class="ps"><div class="ps-l">Max Drawdown</div><div class="ps-v r">-3.1 R</div></div>
+      </div>
+      <div class="log-bar">
+        <div class="log-t">Trade Log</div>
+        <div class="log-tabs">
+          <button class="ltab on">All</button>
+          <button class="ltab">Forex</button>
+          <button class="ltab">Gold / Silver</button>
+        </div>
+      </div>
+      <table class="ttbl">
+        <thead><tr><th>#</th><th>Registered</th><th>Market</th><th>Side</th><th>Entry</th><th>Stop Loss</th><th>Take Profit</th><th>Result</th><th>R</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--t3)">847</td><td>2025-05-09 09:14 UTC</td><td>EUR/USD</td><td class="tln">LONG</td><td>1.0848</td><td style="color:var(--red)">1.0820</td><td style="color:var(--blue)">1.0901</td><td class="tph">TP HIT</td><td class="trp">+1.9</td></tr>
+          <tr><td style="color:var(--t3)">846</td><td>2025-05-08 14:31 UTC</td><td>XAU/USD</td><td class="tsh">SHORT</td><td>2,318.40</td><td style="color:var(--red)">2,334.00</td><td style="color:var(--blue)">2,282.10</td><td class="tph">TP HIT</td><td class="trp">+2.3</td></tr>
+          <tr><td style="color:var(--t3)">845</td><td>2025-05-07 07:58 UTC</td><td>GBP/USD</td><td class="tln">LONG</td><td>1.2648</td><td style="color:var(--red)">1.2610</td><td style="color:var(--blue)">1.2724</td><td class="tsl">SL HIT</td><td class="trn">-1.0</td></tr>
+          <tr><td style="color:var(--t3)">844</td><td>2025-05-06 10:02 UTC</td><td>GBP/JPY</td><td class="tln">LONG</td><td>183.80</td><td style="color:var(--red)">183.40</td><td style="color:var(--blue)">185.10</td><td class="tph">TP HIT</td><td class="trp">+1.8</td></tr>
+          <tr><td style="color:var(--t3)">843</td><td>2025-05-05 08:44 UTC</td><td>EUR/USD</td><td class="tsh">SHORT</td><td>1.0872</td><td style="color:var(--red)">1.0905</td><td style="color:var(--blue)">1.0823</td><td class="tph">TP HIT</td><td class="trp">+1.4</td></tr>
+        </tbody>
+      </table>
+      <div class="analytics">
+        <div class="an" style="padding:14px 16px">
+          <div class="an-t">Cumulative R:R — Last 12 Months</div>
+          <svg width="100%" viewBox="0 0 520 110" style="display:block;overflow:visible">
+            <defs>
+              <linearGradient id="rrgrd" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- zero line -->
+            <line x1="0" y1="80" x2="520" y2="80" stroke="#e5e5e1" stroke-width="0.5"/>
+            <!-- grid lines -->
+            <line x1="0" y1="55" x2="520" y2="55" stroke="#e5e5e1" stroke-width="0.5" stroke-dasharray="2,3"/>
+            <line x1="0" y1="30" x2="520" y2="30" stroke="#e5e5e1" stroke-width="0.5" stroke-dasharray="2,3"/>
+            <!-- area fill -->
+            <polygon points="0,80 44,74 88,68 132,72 176,61 220,66 264,54 308,42 352,48 396,36 440,22 484,14 520,10 520,80 0,80"
+              fill="url(#rrgrd)"/>
+            <!-- line -->
+            <polyline points="0,80 44,74 88,68 132,72 176,61 220,66 264,54 308,42 352,48 396,36 440,22 484,14 520,10"
+              fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- drawdown dip marker -->
+            <circle cx="132" cy="72" r="3" fill="#fff" stroke="#b91c1c" stroke-width="1.5"/>
+            <line x1="132" y1="72" x2="132" y2="80" stroke="#b91c1c" stroke-width="0.5" stroke-dasharray="2,2"/>
+            <!-- peak dot -->
+            <circle cx="520" cy="10" r="3" fill="#1d4ed8"/>
+            <!-- month labels -->
+            <text x="0"   y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Jun</text>
+            <text x="44"  y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Jul</text>
+            <text x="88"  y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Aug</text>
+            <text x="132" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#b91c1c">Sep</text>
+            <text x="176" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Oct</text>
+            <text x="220" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Nov</text>
+            <text x="264" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Dec</text>
+            <text x="308" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Jan</text>
+            <text x="352" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Feb</text>
+            <text x="396" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Mar</text>
+            <text x="440" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Apr</text>
+            <text x="484" y="100" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">May</text>
+            <!-- R labels -->
+            <text x="0" y="82" style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;fill:#8f8f8c">0</text>
+            <text x="0" y="57" style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;fill:#8f8f8c">+12R</text>
+            <text x="0" y="32" style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;fill:#8f8f8c">+24R</text>
+            <!-- current label -->
+            <text x="500" y="8" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;fill:#1d4ed8">+41.2R</text>
+          </svg>
+          <div style="display:flex;gap:16px;margin-top:4px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8f8f8c;display:flex;align-items:center;gap:4px">
+              <span style="width:8px;height:2px;background:#1d4ed8;display:inline-block"></span>Cumulative R:R
+            </span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8f8f8c;display:flex;align-items:center;gap:4px">
+              <span style="width:8px;height:8px;border-radius:50%;border:1.5px solid #b91c1c;background:#fff;display:inline-block"></span>Drawdown
+            </span>
+          </div>
+        </div>
+        <div class="an">
+          <div class="an-t">Performance by Market</div>
+          <div class="an-r"><span class="an-m">EUR/USD</span><div class="an-b"><div class="an-bv" style="width:62%"></div></div><div class="an-s"><span class="an-sv">62% WR</span><span class="an-sv">1.31 R:R</span></div></div>
+          <div class="an-r"><span class="an-m">XAU/USD</span><div class="an-b"><div class="an-bv best" style="width:78%"></div></div><div class="an-s"><span class="an-sv best">78% WR ↑</span><span class="an-sv best">1.42 R:R</span></div></div>
+          <div class="an-r"><span class="an-m">GBP/USD</span><div class="an-b"><div class="an-bv" style="width:55%"></div></div><div class="an-s"><span class="an-sv">55% WR</span><span class="an-sv">1.18 R:R</span></div></div>
+          <div class="an-r"><span class="an-m">GBP/JPY</span><div class="an-b"><div class="an-bv" style="width:68%"></div></div><div class="an-s"><span class="an-sv">68% WR</span><span class="an-sv">1.29 R:R</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFICATION -->
+<section class="verf" id="verification">
+  <div class="verf-in">
+    <span class="sec-k">Trade Verification</span>
+    <div class="sec-h">Every trade. Locked. Forever.</div>
+    <p class="sec-sub" style="margin-bottom:0">Not a claim. The data. Every registered trade gets an immutable ID, price verification, and a hash generated at registration.</p>
+    <div class="verf-grid">
+      <div class="vp">
+        <div class="vp-head">Trade #DOS-847-AMERCER <span class="vp-ok">✓ Verified</span></div>
+        <div class="vp-row"><span class="vp-k">Registered</span><span class="vp-v">2025-05-09 09:14:32 UTC</span></div>
+        <div class="vp-row"><span class="vp-k">Market / Side</span><span class="vp-v">EUR/USD · LONG</span></div>
+        <div class="vp-row"><span class="vp-k">Entry verified at</span><span class="vp-v ok">1.08480 · live price confirmed ✓</span></div>
+        <div class="vp-row"><span class="vp-k">Stop Loss</span><span class="vp-v">1.08200 · 53 pts · passed ✓</span></div>
+        <div class="vp-row"><span class="vp-k">Take Profit</span><span class="vp-v">1.09010</span></div>
+        <div class="vp-row"><span class="vp-k">R:R calculated</span><span class="vp-v ok">2.11 · auto-generated ✓</span></div>
+        <div class="vp-row"><span class="vp-k">Duration</span><span class="vp-v">4h 32m · within 48h ✓</span></div>
+        <div class="vp-row"><span class="vp-k">Outcome</span><span class="vp-v ok">TP HIT · 13:46:18 UTC · +1.9R ✓</span></div>
+        <div class="vp-notice">This trade record was sealed at 09:14:32 UTC. No fields can be modified after registration.</div>
+      </div>
+      <div class="vp">
+        <div class="vp-head">Immutable Record <span class="vp-lk">Locked</span></div>
+        <div class="vp-row"><span class="vp-k">Trade ID</span><span class="vp-v">DOS-847-AMERCER-20250509</span></div>
+        <div class="vp-row"><span class="vp-k">Registration hash</span><span class="vp-v hash">a3f9c1d2e5b8f094c7e2a481d63b0f28<br>9e1c4a7d2b5f038e6c9a1d4b7e2f5c8a1</span></div>
+        <div class="vp-row"><span class="vp-k">Price source</span><span class="vp-v">System-verified at registration</span></div>
+        <div class="vp-row"><span class="vp-k">R:R source</span><span class="vp-v">Auto-calculated · not user-entered</span></div>
+        <div class="vp-row"><span class="vp-k">Modifications</span><span class="vp-v ok">None · 0 edits · sealed</span></div>
+        <div class="vp-row"><span class="vp-k">Audit log</span><span class="vp-v">1 event: registration</span></div>
+        <div class="vp-row"><span class="vp-k">Visible to</span><span class="vp-v">Public · all users</span></div>
+        <div class="vp-row"><span class="vp-k">Score impact</span><span class="vp-v ok">Recovery Score updated ✓</span></div>
+        <div class="vp-notice">The hash is generated from the trade data at registration. Any modification produces a different hash — making tampering detectable.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="rules" id="rules">
+  <div class="rules-in">
+    <div class="rules-top">
+      <div>
+        <span class="sec-k">How It Works</span>
+        <div class="sec-h">Four rules.<br>No exceptions.</div>
+      </div>
+      <div class="rules-lead">A trade that does not satisfy all four rules is rejected at registration. No workarounds. No edge cases.</div>
+    </div>
+    <table class="rtbl">
+      <tr>
+        <td style="width:60px"><div class="rnum">01</div></td>
+        <td style="width:220px"><div class="rtitle">Manual registration only.</div></td>
+        <td><div class="rtext">Submit entry, SL, and TP manually. The system validates the live price, auto-calculates R:R, and publishes. <strong>No broker API. No automation.</strong> You register every trade yourself.</div></td>
+      </tr>
+      <tr>
+        <td><div class="rnum">02</div></td>
+        <td><div class="rtitle">SL mandatory. Minimum 50 points.</div></td>
+        <td><div class="rtext">No SL, no trade. Minimum <strong>50 points</strong> — not pips. Eliminates spread-as-stop entries and noise. R:R is only meaningful when risk is real and defined.</div></td>
+      </tr>
+      <tr>
+        <td><div class="rnum">03</div></td>
+        <td><div class="rtitle">Maximum duration: 48 hours.</div></td>
+        <td><div class="rtext">Unresolved after 48h → <strong>auto-closed at current price</strong>. DOSSIER is a ranking for active day traders. Swing traders and position holders cannot compete here.</div></td>
+      </tr>
+      <tr>
+        <td><div class="rnum">04</div></td>
+        <td><div class="rtitle">Your record is permanent.</div></td>
+        <td><div class="rtext">Every trade, every loss, every drawdown. Public. Forever. <strong>You cannot delete a losing trade.</strong> That is precisely what makes the rank worth having.</div></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who">
+  <div class="who-in">
+    <div class="who-top">
+      <div>
+        <span class="sec-k">Who This Is For</span>
+        <div class="who-hh">The rules filter<br>automatically.</div>
+      </div>
+      <div class="who-lead">Manual registration, 48-hour max, 50-point minimum stop. Three constraints that define exactly who belongs at the top of this ranking.</div>
+    </div>
+    <table class="who-tbl">
+      <tr>
+        <td class="who-verdict out">Filtered out</td>
+        <td style="width:220px"><div class="who-tbl-title">Swing &amp; position traders</div></td>
+        <td><div class="who-tbl-text">Trades held for days hit the 48-hour limit. A meaningful rank requires active, daily trading. The leaderboard rewards those who show up every session.</div></td>
+      </tr>
+      <tr>
+        <td class="who-verdict out">Filtered out</td>
+        <td><div class="who-tbl-title">Robots &amp; automated systems</div></td>
+        <td><div class="who-tbl-text">No API. Every trade registered manually. Bots firing hundreds of entries per day cannot register them. Algorithmic trading has no place here.</div></td>
+      </tr>
+      <tr>
+        <td class="who-verdict out">Filtered out</td>
+        <td><div class="who-tbl-title">Scalpers with noise stops</div></td>
+        <td><div class="who-tbl-text">A stop below 50 points is rejected. Eliminates entries where risk equals the spread. Every registered trade reflects a real, deliberate decision.</div></td>
+      </tr>
+      <tr class="in-row">
+        <td class="who-verdict in">What remains</td>
+        <td><div class="who-tbl-title">Active day traders who perform.</div></td>
+        <td><div class="who-tbl-text">Present every session. Deliberate about setups. Define risk before entering. Register every trade by hand. Trade often enough to build a rank that means something. <strong>If that is you — this was built for you.</strong></div></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-in">
+    <div>
+      <div class="cta-h">Are you good enough<br>to find out?</div>
+      <div class="cta-sub">Your Recovery Score starts at zero. Your first registered trade changes that.<br>Public from day one. Permanent from day one.</div>
+    </div>
+    <div class="cta-r">
+      <a href="#" class="btn-p">Register Your Record →</a>
+      <div class="cta-note">No deposit required · Fully public · Permanent</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftr">
+    <div>
+      <div class="ftr-logo">
+        <svg width="76" height="16" viewBox="0 0 76 16" style="display:block">
+          <text x="0" y="13" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.14em;fill:rgba(255,255,255,0.6)">DOS</text>
+          <rect x="29" y="2" width="45" height="12" fill="rgba(255,255,255,0.6)"/>
+        </svg>
+      </div>
+      <div class="ftr-tag">The Official Record of Verified Traders</div>
+      <div class="ftr-line">Every serious field has a standard. Trading never did.</div>
+    </div>
+    <div class="ftr-links">
+      <a href="#">About</a><a href="#">Methodology</a><a href="#">Rules</a><a href="#">API</a><a href="#">Contact</a>
+    </div>
+    <div class="ftr-copy">© 2025 DOSSIER · All rights reserved</div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.htab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.htab').forEach(x=>x.classList.remove('on'));t.classList.add('on');});});
+document.querySelectorAll('.ltab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.ltab').forEach(x=>x.classList.remove('on'));t.classList.add('on');});});
+const nls=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{let c='';document.querySelectorAll('[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-60)c=s.id;});nls.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+c));},{passive:true});
+</script>
+</body>
+</html>

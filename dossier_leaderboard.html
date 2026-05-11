@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DOSSIER — Leaderboard</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#111827;--blue:#1d4ed8;--blue2:#1e40af;--blue-lt:#eff4ff;
+  --bg:#fff;--bg2:#f9f9f8;--bg3:#f0f0ee;
+  --bdr:#e5e5e1;--bdr2:#c8c8c4;
+  --text:#050505;--t2:#3f3f3c;--t3:#8f8f8c;
+  --red:#b91c1c;--red-lt:#fef2f2;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'IBM Plex Sans',sans-serif;
+  --disp:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg2);color:var(--text);min-height:100vh}
+
+/* NAV */
+.nav{background:#0c0c0c;height:56px;display:flex;align-items:stretch;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:18px;padding:0 28px;border-right:1px solid rgba(255,255,255,0.1);flex-shrink:0}
+.nb-pipe{width:1px;height:30px;background:rgba(255,255,255,0.18);flex-shrink:0}
+.nb-sub{font-family:var(--sans);font-size:9px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.04em;line-height:1.6}
+.nav-links{display:flex;align-items:stretch;list-style:none;height:100%}
+.nav-links li{display:flex;height:100%}
+.nav-links a{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;padding:0 18px;display:flex;align-items:center;height:100%;border-right:1px solid rgba(255,255,255,0.07);transition:color .1s,background .1s}
+.nav-links li:first-child a{border-left:1px solid rgba(255,255,255,0.07)}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.04)}
+.nav-links a.on{color:rgba(255,255,255,0.9)}
+.nav-right{margin-left:auto;display:flex;align-items:stretch}
+.nav-login{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.38);text-decoration:none;padding:0 22px;display:flex;align-items:center;border-left:1px solid rgba(255,255,255,0.07);transition:color .1s}
+.nav-login:hover{color:rgba(255,255,255,0.7)}
+.nav-cta{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;background:var(--blue);color:#fff;padding:0 26px;display:flex;align-items:center;text-decoration:none;white-space:nowrap;transition:background .1s;border-left:1px solid rgba(255,255,255,0.07)}
+.nav-cta:hover{background:var(--blue2)}
+
+/* STRIP */
+.strip{background:#fff;border-bottom:1px solid var(--bdr);height:38px;display:flex;align-items:center}
+.strip-in{display:flex;align-items:center;width:100%;padding:0 28px;gap:0}
+.si{font-family:var(--mono);font-size:10.5px;color:var(--t3);display:flex;align-items:center;gap:8px;padding-right:22px;margin-right:22px;border-right:1px solid var(--bdr);white-space:nowrap}
+.siv{font-weight:600;color:var(--t2)}
+.dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:bl 1.9s ease infinite}
+@keyframes bl{0%,100%{opacity:1}55%{opacity:.25}}
+.strip-quote{margin-left:auto;font-family:var(--sans);font-size:12px;color:var(--t3);white-space:nowrap}
+
+/* PAGE HEADER */
+.page-head{background:#fff;border-bottom:2px solid var(--bdr);padding:28px 28px 24px}
+.page-head-in{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px}
+.ph-k{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
+.ph-h{font-family:var(--disp);font-size:32px;font-weight:900;letter-spacing:-0.03em;color:var(--text);line-height:1}
+.ph-cards{display:flex;gap:0}
+.ph-card{padding:0 24px;border-left:1px solid var(--bdr);text-align:right}
+.ph-card:first-child{border-left:none;padding-left:0}
+.ph-card-l{font-family:var(--mono);font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);margin-bottom:3px}
+.ph-card-v{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--text)}
+.ph-card-v.blue{color:var(--blue)}
+
+/* FILTER BAR */
+.fbar{background:#fff;border-bottom:1px solid var(--bdr);display:flex;align-items:stretch;padding:0 28px;gap:0}
+.fbar-in{max-width:1400px;margin:0 auto;display:flex;align-items:stretch;width:100%;gap:0}
+.ftab{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:10px 16px;border:none;background:transparent;color:var(--t3);cursor:pointer;transition:all .1s;border-bottom:2px solid transparent;white-space:nowrap}
+.ftab.on{color:var(--navy);border-bottom-color:var(--navy)}
+.ftab:hover:not(.on){color:var(--t2)}
+.fbar-right{margin-left:auto;display:flex;align-items:center;gap:8px;padding:8px 0}
+.fbar-select{font-family:var(--mono);font-size:10px;color:var(--t2);background:var(--bg3);border:1px solid var(--bdr);padding:5px 10px;cursor:pointer}
+.fbar-search{font-family:var(--mono);font-size:11px;color:var(--t2);background:var(--bg3);border:1px solid var(--bdr);padding:5px 12px;width:180px;outline:none}
+.fbar-search:focus{border-color:var(--blue);background:#fff}
+.fbar-search::placeholder{color:var(--t3)}
+
+/* TABLE WRAPPER */
+.tbl-wrap{max-width:1400px;margin:0 auto;padding:0 28px 48px}
+
+/* MAIN TABLE */
+.lb-tbl{width:100%;border-collapse:collapse;background:#fafafa;border:1px solid var(--bdr)}
+.lb-tbl thead{position:sticky;top:94px;z-index:10}
+.lb-tbl thead tr{background:#2c2c2a;border-bottom:2px solid #1a1a18}
+.lb-tbl thead th{padding:10px 14px;font-family:var(--mono);font-size:8.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-align:left;white-space:nowrap;border-right:1px solid rgba(255,255,255,0.09);cursor:pointer;user-select:none;transition:color .1s}
+.lb-tbl thead th:last-child{border-right:none;cursor:default}
+.lb-tbl thead th:hover:not(:last-child){color:rgba(255,255,255,0.88)}
+.lb-tbl thead th.sort-on{color:rgba(255,255,255,0.95)}
+.lb-tbl tbody tr.trader-row{border-bottom:1px solid var(--bdr);cursor:pointer;transition:background .07s;background:#fff}
+.lb-tbl tbody tr.trader-row:nth-child(4n+1){background:#fefefe}
+.lb-tbl tbody tr.trader-row:hover{background:#eef3ff}
+.lb-tbl tbody tr.trader-row.open{background:#e8efff}
+.lb-tbl tbody tr.trader-row.open:hover{background:#e2eaff}
+.lb-tbl tbody td{padding:0 14px;height:54px;font-size:12px;color:var(--t2);vertical-align:middle;white-space:nowrap;border-right:1px solid var(--bdr)}
+.lb-tbl tbody td:last-child{border-right:none}
+
+/* expand row */
+.expand-row td{padding:0;border-bottom:2px solid var(--blue);height:auto!important}
+.expand-panel{padding:24px 28px;background:var(--bg2);border-top:1px solid var(--bdr);display:grid;grid-template-columns:220px 1fr 1fr;gap:0}
+
+/* rank cell */
+.rk{display:flex;align-items:center;gap:5px}
+.rk-n{font-family:var(--mono);font-weight:600;color:var(--text);min-width:22px;font-size:14px}
+.rk-n.top3{font-size:18px}
+.rk-mv{font-family:var(--mono);font-size:9px;font-weight:600}
+.up{color:var(--blue)} .dn{color:var(--red)} .fl{color:var(--t3)}
+
+/* trader name cell */
+.tr-cell{display:flex;flex-direction:column;gap:2px}
+.tr-nm{font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--text)}
+.tr-tag{font-family:var(--mono);font-size:8.5px;color:var(--t3);letter-spacing:0.02em}
+.bdg{font-family:var(--mono);font-size:7px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 5px;border:1px solid rgba(29,78,216,0.38);color:var(--blue);margin-left:8px;vertical-align:middle}
+
+/* score */
+.sc{font-family:var(--mono);font-weight:600;color:var(--blue)}
+.sc.lg{font-size:24px}
+.sc.md{font-size:20px}
+.sc.sm{font-size:16px}
+
+/* data cells */
+.dc{font-family:var(--mono);font-size:12px;color:var(--t2);font-weight:500}
+.dc.pos{color:var(--blue)} .dc.neg{color:var(--red)}
+.dd-cell{font-family:var(--mono);font-size:11px;color:var(--t3)}
+
+/* sparkline */
+.spk-up{stroke:var(--blue);fill:none}
+.spk-dn{stroke:var(--red);fill:none}
+.spk-fl{stroke:var(--t3);fill:none}
+
+/* status badge */
+.st-e{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:0.05em;color:var(--blue)}
+.st-p{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:0.04em;color:var(--t3)}
+
+/* live badge */
+.live-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:0.1em;color:#15803d;background:#f0fdf4;border:1px solid #bbf7d0;padding:2px 7px;white-space:nowrap}
+.live-badge .ldot{width:5px;height:5px;border-radius:50%;background:#22c55e;animation:bl 1.9s ease infinite;flex-shrink:0}
+.last-act{font-family:var(--mono);font-size:11px;color:var(--t3);white-space:nowrap}
+.chev{font-size:10px;color:var(--t3);transition:transform .2s;display:flex;align-items:center}
+.chev.open{transform:rotate(180deg);color:var(--blue)}
+
+/* EXPAND PANEL */
+.ep-stats{padding:0 24px 0 0;border-right:1px solid var(--bdr)}
+.ep-stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--bdr)}
+.ep-stat-row:first-child{padding-top:0}
+.ep-stat-row:last-child{border-bottom:none}
+.ep-stat-l{font-family:var(--mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3)}
+.ep-stat-v{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text)}
+.ep-stat-v.blue{color:var(--blue)}
+.ep-stat-v.red{color:var(--red)}
+.ep-stat-v.big{font-size:28px;color:var(--blue)}
+
+.ep-chart{padding:0 24px;border-right:1px solid var(--bdr)}
+.ep-chart-title{font-family:var(--mono);font-size:8.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+
+.ep-trades{padding:0 0 0 24px}
+.ep-trades-title{font-family:var(--mono);font-size:8.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+.mini-tbl{width:100%;border-collapse:collapse;font-family:var(--mono)}
+.mini-tbl thead tr{background:#2c2c2a}
+.mini-tbl thead th{padding:5px 8px;font-size:7.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-align:left;border-bottom:1px solid #1a1a18;border-right:1px solid rgba(255,255,255,0.09)}
+.mini-tbl thead th:last-child{border-right:none}
+.mini-tbl tbody tr{border-bottom:1px solid var(--bdr)}
+.mini-tbl tbody td{padding:5px 8px;font-size:10.5px;color:var(--t2);border-right:1px solid var(--bdr)}
+.mini-tbl tbody td:last-child{border-right:none}
+.ep-view-btn{margin-top:10px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);background:transparent;border:1px solid rgba(29,78,216,0.3);padding:7px 14px;cursor:pointer;transition:all .1s;display:inline-flex;align-items:center;gap:5px}
+.ep-view-btn:hover{background:var(--blue-lt)}
+
+/* TFOOT */
+.tbl-foot{background:#f5f5f3;border-top:1px solid var(--bdr);border:1px solid var(--bdr);border-top:none;padding:9px 14px;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--t3)}
+.pgr{display:flex;gap:2px}
+.pg{width:26px;height:26px;border:1px solid var(--bdr);background:transparent;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--t3);display:flex;align-items:center;justify-content:center;transition:all .1s}
+.pg:hover{border-color:var(--navy);color:var(--navy)}
+.pg.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand" style="padding:0 28px;border-right:1px solid rgba(255,255,255,0.1);display:flex;align-items:center">
+    <svg width="120" height="20" viewBox="0 0 120 20" style="display:block;flex-shrink:0">
+      <text x="0" y="16" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;letter-spacing:0.2em;fill:#ffffff">DOSSIER</text>
+      <rect x="68" y="3" width="50" height="14" fill="#ffffff"/>
+    </svg>
+  </div>
+  <ul class="nav-links">
+    <li><a href="trdr_v12.html">Rankings</a></li>
+    <li><a href="trdr_v12.html#verification">Verification</a></li>
+    <li><a href="trdr_v12.html#score">Methodology</a></li>
+    <li><a href="#" class="on">Leaderboard</a></li>
+    <li><a href="trdr_v12.html#rules">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-login">Log In</a>
+    <a href="#" class="nav-cta">Register Your Record</a>
+  </div>
+</nav>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-in">
+    <div class="si"><span class="dot"></span><span>Live</span></div>
+    <div class="si"><span>Verified Trades:</span><span class="siv">1,392,817</span></div>
+    <div class="si"><span>Traders:</span><span class="siv">18,764</span></div>
+    <div class="si"><span>Markets:</span><span class="siv">Forex · Gold · Silver</span></div>
+    <span class="strip-quote">The leaderboard reflects exactly who the best traders are — not who tells the best story.</span>
+  </div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-head">
+  <div class="page-head-in">
+    <div>
+      <div class="ph-k">Full Leaderboard</div>
+      <div class="ph-h">The Official Rankings</div>
+    </div>
+    <div class="ph-cards">
+      <div class="ph-card">
+        <div class="ph-card-l">Top Recovery Score</div>
+        <div class="ph-card-v blue">92.4</div>
+      </div>
+      <div class="ph-card">
+        <div class="ph-card-l">Elite Traders</div>
+        <div class="ph-card-v">91</div>
+      </div>
+      <div class="ph-card">
+        <div class="ph-card-l">Total Traders</div>
+        <div class="ph-card-v">18,764</div>
+      </div>
+      <div class="ph-card">
+        <div class="ph-card-l">Global Avg R:R</div>
+        <div class="ph-card-v">1.24</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="fbar">
+  <div class="fbar-in">
+    <button class="ftab on" onclick="setTab(this)">All Time</button>
+    <button class="ftab" onclick="setTab(this)">This Month</button>
+    <button class="ftab" onclick="setTab(this)">This Week</button>
+    <button class="ftab" onclick="setTab(this)">Today</button>
+    <div class="fbar-right">
+      <select class="fbar-select">
+        <option>All Markets</option>
+        <option>Forex</option>
+        <option>Gold / Silver</option>
+      </select>
+      <select class="fbar-select">
+        <option>All Tiers</option>
+        <option>Elite</option>
+        <option>Pro</option>
+        <option>Ranked</option>
+      </select>
+      <input class="fbar-search" placeholder="Search trader…" oninput="filterTable(this.value)">
+    </div>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="tbl-wrap" style="padding-top:20px">
+<table class="lb-tbl" id="lb">
+  <thead>
+    <tr>
+      <th style="width:70px">#</th>
+      <th>Trader</th>
+      <th class="sort-on" style="min-width:140px">Recovery Score ↓</th>
+      <th></th>
+      <th>Total R:R</th>
+      <th>Trades</th>
+      <th>Win Rate</th>
+      <th>Avg R:R</th>
+      <th>Max DD</th>
+      <th>Last Active</th>
+    </tr>
+  </thead>
+  <tbody id="lb-body"></tbody>
+</table>
+<div class="tbl-foot">
+  <span id="count-label">Showing 1–20 of 18,764 verified traders</span>
+  <div class="pgr">
+    <button class="pg">←</button>
+    <button class="pg on">1</button>
+    <button class="pg">2</button>
+    <button class="pg">3</button>
+    <button class="pg">4</button>
+    <button class="pg">5</button>
+    <span style="font-family:var(--mono);font-size:10px;color:var(--t3);padding:0 3px;line-height:26px">…</span>
+    <button class="pg">938</button>
+    <button class="pg">→</button>
+  </div>
+</div>
+</div>
+
+<script>
+const TRADERS = [
+  {rank:1,mv:2,name:"Alex Mercer",streak:13,elite:true,score:92.4,spk:"up",rr:41.2,trades:847,wr:72.3,avg:2.87,dd:-3.1,lastActive:"live",markets:["EUR/USD","XAU/USD","GBP/JPY"],
+    logs:[{n:847,d:"2025-05-09",m:"EUR/USD",s:"LONG",r:"+1.9R",res:"TP HIT"},{n:846,d:"2025-05-08",m:"XAU/USD",s:"SHORT",r:"+2.3R",res:"TP HIT"},{n:845,d:"2025-05-07",m:"GBP/JPY",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:844,d:"2025-05-06",m:"EUR/USD",s:"LONG",r:"+1.8R",res:"TP HIT"}],
+    curve:[10,14,22,36,30,42,54,48,61,66,68,74,80]},
+  {rank:2,mv:-1,name:"Kaito Nakamura",streak:8,elite:true,score:89.7,spk:"up",rr:38.6,trades:1203,wr:71.8,avg:2.31,dd:-2.8,lastActive:"today",markets:["GBP/USD","EUR/JPY","USD/CHF"],
+    logs:[{n:1203,d:"2025-05-09",m:"GBP/USD",s:"LONG",r:"+2.1R",res:"TP HIT"},{n:1202,d:"2025-05-08",m:"EUR/JPY",s:"SHORT",r:"+1.8R",res:"TP HIT"},{n:1201,d:"2025-05-07",m:"USD/CHF",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:1200,d:"2025-05-06",m:"GBP/USD",s:"SHORT",r:"+2.0R",res:"TP HIT"}],
+    curve:[12,18,26,40,35,52,58,50,65,70,72,76,80]},
+  {rank:3,mv:0,name:"Michael Zhang",streak:6,elite:true,score:87.1,spk:"up",rr:33.4,trades:412,wr:68.9,avg:2.14,dd:-2.5,lastActive:"live",markets:["XAU/USD","XAG/USD","EUR/USD"],
+    logs:[{n:412,d:"2025-05-09",m:"XAU/USD",s:"SHORT",r:"+2.4R",res:"TP HIT"},{n:411,d:"2025-05-08",m:"XAG/USD",s:"LONG",r:"+1.6R",res:"TP HIT"},{n:410,d:"2025-05-07",m:"EUR/USD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:409,d:"2025-05-06",m:"XAU/USD",s:"LONG",r:"+2.1R",res:"TP HIT"}],
+    curve:[16,22,30,38,34,44,52,48,60,66,70,74,80]},
+  {rank:4,mv:5,name:"Arjun Patel",streak:4,elite:false,score:83.6,spk:"up",rr:29.7,trades:298,wr:70.2,avg:1.98,dd:-2.3,lastActive:"today",markets:["USD/JPY","EUR/USD","GBP/USD"],
+    logs:[{n:298,d:"2025-05-09",m:"USD/JPY",s:"LONG",r:"+1.7R",res:"TP HIT"},{n:297,d:"2025-05-08",m:"EUR/USD",s:"LONG",r:"+2.0R",res:"TP HIT"},{n:296,d:"2025-05-07",m:"GBP/USD",s:"SHORT",r:"+1.5R",res:"TP HIT"},{n:295,d:"2025-05-06",m:"USD/JPY",s:"SHORT",r:"-1.0R",res:"SL HIT"}],
+    curve:[18,24,30,36,32,44,50,46,56,62,68,72,76]},
+  {rank:5,mv:1,name:"Diego Martinez",streak:11,elite:false,score:81.3,spk:"up",rr:27.9,trades:534,wr:67.5,avg:1.85,dd:-2.1,lastActive:"1d",markets:["EUR/USD","GBP/EUR","USD/CAD"],
+    logs:[{n:534,d:"2025-05-09",m:"EUR/USD",s:"SHORT",r:"+1.8R",res:"TP HIT"},{n:533,d:"2025-05-08",m:"GBP/EUR",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:532,d:"2025-05-07",m:"EUR/USD",s:"LONG",r:"+2.2R",res:"TP HIT"},{n:531,d:"2025-05-06",m:"USD/CAD",s:"SHORT",r:"+1.6R",res:"TP HIT"}],
+    curve:[27,32,37,42,47,52,56,52,60,65,70,74,78]},
+  {rank:6,mv:-3,name:"James Wilson",streak:0,elite:false,score:79.8,spk:"dn",rr:26.1,trades:201,wr:65.8,avg:1.72,dd:-4.8,lastActive:"2d",markets:["GBP/USD","EUR/GBP"],
+    logs:[{n:201,d:"2025-05-09",m:"GBP/USD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:200,d:"2025-05-08",m:"EUR/GBP",s:"SHORT",r:"-1.0R",res:"SL HIT"},{n:199,d:"2025-05-07",m:"GBP/USD",s:"LONG",r:"+1.9R",res:"TP HIT"},{n:198,d:"2025-05-06",m:"GBP/USD",s:"SHORT",r:"+1.4R",res:"TP HIT"}],
+    curve:[38,44,50,56,62,66,70,68,72,76,72,68,65]},
+  {rank:7,mv:0,name:"Ethan Collins",streak:48,elite:false,score:76.4,spk:"fl",rr:22.8,trades:389,wr:64.9,avg:1.63,dd:-1.9,lastActive:"today",markets:["EUR/USD","USD/CHF","AUD/USD"],
+    logs:[{n:389,d:"2025-05-09",m:"EUR/USD",s:"LONG",r:"+1.5R",res:"TP HIT"},{n:388,d:"2025-05-08",m:"USD/CHF",s:"SHORT",r:"+1.8R",res:"TP HIT"},{n:387,d:"2025-05-07",m:"AUD/USD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:386,d:"2025-05-06",m:"EUR/USD",s:"SHORT",r:"+1.7R",res:"TP HIT"}],
+    curve:[45,48,51,54,57,60,63,62,65,68,70,73,75]},
+  {rank:8,mv:4,name:"Yuki Tanaka",streak:5,elite:false,score:74.2,spk:"up",rr:21.4,trades:267,wr:63.7,avg:1.59,dd:-2.2,lastActive:"live",markets:["XAU/USD","XAG/USD"],
+    logs:[{n:267,d:"2025-05-09",m:"XAU/USD",s:"LONG",r:"+2.0R",res:"TP HIT"},{n:266,d:"2025-05-08",m:"XAG/USD",s:"SHORT",r:"+1.7R",res:"TP HIT"},{n:265,d:"2025-05-07",m:"XAU/USD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:264,d:"2025-05-06",m:"XAU/USD",s:"SHORT",r:"+1.9R",res:"TP HIT"}],
+    curve:[34,38,42,46,42,50,54,50,58,62,66,70,73]},
+  {rank:9,mv:-2,name:"Sofia Russo",streak:2,elite:false,score:72.1,spk:"fl",rr:19.6,trades:445,wr:62.4,avg:1.48,dd:-3.0,lastActive:"3d",markets:["EUR/USD","EUR/CHF"],
+    logs:[{n:445,d:"2025-05-09",m:"EUR/USD",s:"SHORT",r:"+1.4R",res:"TP HIT"},{n:444,d:"2025-05-08",m:"EUR/CHF",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:443,d:"2025-05-07",m:"EUR/USD",s:"LONG",r:"+1.6R",res:"TP HIT"},{n:442,d:"2025-05-06",m:"EUR/USD",s:"SHORT",r:"-1.0R",res:"SL HIT"}],
+    curve:[46,50,54,58,54,60,64,60,65,68,70,71,72]},
+  {rank:10,mv:0,name:"David Anderson",streak:7,elite:false,score:69.3,spk:"fl",rr:18.2,trades:312,wr:61.8,avg:1.41,dd:-1.6,lastActive:"1d",markets:["USD/JPY","NZD/USD","GBP/USD"],
+    logs:[{n:312,d:"2025-05-09",m:"USD/JPY",s:"LONG",r:"+1.3R",res:"TP HIT"},{n:311,d:"2025-05-08",m:"NZD/USD",s:"SHORT",r:"+1.6R",res:"TP HIT"},{n:310,d:"2025-05-07",m:"GBP/USD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:309,d:"2025-05-06",m:"USD/JPY",s:"SHORT",r:"+1.4R",res:"TP HIT"}],
+    curve:[48,51,54,57,60,62,63,62,65,66,67,68,69]},
+  {rank:11,mv:2,name:"Hana Müller",streak:3,elite:false,score:67.8,spk:"up",rr:16.8,trades:289,wr:60.2,avg:1.38,dd:-2.9,lastActive:"today",markets:["EUR/USD","EUR/JPY"],
+    logs:[{n:289,d:"2025-05-09",m:"EUR/USD",s:"LONG",r:"+1.5R",res:"TP HIT"},{n:288,d:"2025-05-08",m:"EUR/JPY",s:"SHORT",r:"+1.8R",res:"TP HIT"},{n:287,d:"2025-05-07",m:"EUR/USD",s:"SHORT",r:"-1.0R",res:"SL HIT"},{n:286,d:"2025-05-06",m:"EUR/JPY",s:"LONG",r:"+1.6R",res:"TP HIT"}],
+    curve:[38,42,50,60,55,58,54,50,55,60,62,64,67]},
+  {rank:12,mv:-1,name:"Omar Khalid",streak:4,elite:false,score:65.2,spk:"fl",rr:15.4,trades:198,wr:59.8,avg:1.33,dd:-2.4,lastActive:"2d",markets:["GBP/USD","GBP/JPY","GBP/CHF"],
+    logs:[{n:198,d:"2025-05-09",m:"GBP/USD",s:"SHORT",r:"+1.4R",res:"TP HIT"},{n:197,d:"2025-05-08",m:"GBP/JPY",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:196,d:"2025-05-07",m:"GBP/CHF",s:"SHORT",r:"+1.7R",res:"TP HIT"},{n:195,d:"2025-05-06",m:"GBP/USD",s:"LONG",r:"+1.3R",res:"TP HIT"}],
+    curve:[45,47,50,53,56,58,60,59,61,62,63,64,65]},
+  {rank:13,mv:3,name:"Lena Petrov",streak:8,elite:false,score:62.7,spk:"up",rr:14.1,trades:156,wr:58.9,avg:1.28,dd:-1.8,lastActive:"live",markets:["XAG/USD","XAU/USD"],
+    logs:[{n:156,d:"2025-05-09",m:"XAG/USD",s:"LONG",r:"+1.9R",res:"TP HIT"},{n:155,d:"2025-05-08",m:"XAU/USD",s:"SHORT",r:"+1.5R",res:"TP HIT"},{n:154,d:"2025-05-07",m:"XAG/USD",s:"SHORT",r:"-1.0R",res:"SL HIT"},{n:153,d:"2025-05-06",m:"XAG/USD",s:"LONG",r:"+1.8R",res:"TP HIT"}],
+    curve:[35,38,41,45,42,48,52,48,54,57,59,61,63]},
+  {rank:14,mv:-4,name:"Carlos Reyes",streak:0,elite:false,score:60.1,spk:"dn",rr:12.8,trades:342,wr:57.4,avg:1.21,dd:-5.2,lastActive:"4d",markets:["USD/MXN","USD/CAD","AUD/USD"],
+    logs:[{n:342,d:"2025-05-09",m:"USD/CAD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:341,d:"2025-05-08",m:"AUD/USD",s:"SHORT",r:"-1.0R",res:"SL HIT"},{n:340,d:"2025-05-07",m:"USD/CAD",s:"LONG",r:"+1.4R",res:"TP HIT"},{n:339,d:"2025-05-06",m:"AUD/USD",s:"LONG",r:"-1.0R",res:"SL HIT"}],
+    curve:[40,46,52,58,62,66,70,68,72,70,65,62,60]},
+  {rank:15,mv:0,name:"Priya Sharma",streak:6,elite:false,score:58.4,spk:"fl",rr:11.6,trades:278,wr:56.8,avg:1.17,dd:-2.1,lastActive:"1d",markets:["EUR/USD","USD/INR"],
+    logs:[{n:278,d:"2025-05-09",m:"EUR/USD",s:"LONG",r:"+1.2R",res:"TP HIT"},{n:277,d:"2025-05-08",m:"EUR/USD",s:"SHORT",r:"+1.5R",res:"TP HIT"},{n:276,d:"2025-05-07",m:"EUR/USD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:275,d:"2025-05-06",m:"EUR/USD",s:"SHORT",r:"+1.3R",res:"TP HIT"}],
+    curve:[55,56,57,57,56,57,57,56,57,58,58,58,58]},
+  {rank:16,mv:1,name:"Felix Wagner",streak:9,elite:false,score:55.9,spk:"fl",rr:10.4,trades:134,wr:55.2,avg:1.12,dd:-1.3,lastActive:"2d",markets:["USD/CHF","EUR/CHF"],
+    logs:[{n:134,d:"2025-05-09",m:"USD/CHF",s:"SHORT",r:"+1.1R",res:"TP HIT"},{n:133,d:"2025-05-08",m:"EUR/CHF",s:"LONG",r:"+1.4R",res:"TP HIT"},{n:132,d:"2025-05-07",m:"USD/CHF",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:131,d:"2025-05-06",m:"EUR/CHF",s:"SHORT",r:"+1.2R",res:"TP HIT"}],
+    curve:[56,57,56,57,56,57,56,57,55,56,55,56,56]},
+  {rank:17,mv:-2,name:"Yuna Park",streak:0,elite:false,score:53.1,spk:"dn",rr:9.2,trades:88,wr:54.5,avg:1.08,dd:-3.4,lastActive:"5d",markets:["EUR/USD","AUD/JPY"],
+    logs:[{n:88,d:"2025-05-09",m:"EUR/USD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:87,d:"2025-05-08",m:"AUD/JPY",s:"SHORT",r:"+1.3R",res:"TP HIT"},{n:86,d:"2025-05-07",m:"EUR/USD",s:"LONG",r:"+1.2R",res:"TP HIT"},{n:85,d:"2025-05-06",m:"AUD/JPY",s:"LONG",r:"-1.0R",res:"SL HIT"}],
+    curve:[51,54,57,60,58,61,64,62,60,58,56,54,53]},
+  {rank:18,mv:5,name:"Marco Bianchi",streak:12,elite:false,score:51.4,spk:"up",rr:8.8,trades:64,wr:53.1,avg:1.05,dd:-1.9,lastActive:"today",markets:["EUR/USD","EUR/GBP"],
+    logs:[{n:64,d:"2025-05-09",m:"EUR/USD",s:"SHORT",r:"+1.2R",res:"TP HIT"},{n:63,d:"2025-05-08",m:"EUR/GBP",s:"LONG",r:"+1.4R",res:"TP HIT"},{n:62,d:"2025-05-07",m:"EUR/USD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:61,d:"2025-05-06",m:"EUR/GBP",s:"SHORT",r:"+1.1R",res:"TP HIT"}],
+    curve:[44,46,48,50,48,50,51,50,51,51,51,51,51]},
+  {rank:19,mv:-3,name:"Ana Sousa",streak:0,elite:false,score:48.7,spk:"dn",rr:7.4,trades:112,wr:51.8,avg:1.02,dd:-4.1,lastActive:"7d",markets:["USD/BRL","USD/CAD"],
+    logs:[{n:112,d:"2025-05-09",m:"USD/CAD",s:"LONG",r:"-1.0R",res:"SL HIT"},{n:111,d:"2025-05-08",m:"USD/CAD",s:"SHORT",r:"+1.2R",res:"TP HIT"},{n:110,d:"2025-05-07",m:"USD/CAD",s:"LONG",r:"+1.1R",res:"TP HIT"},{n:109,d:"2025-05-06",m:"USD/CAD",s:"SHORT",r:"-1.0R",res:"SL HIT"}],
+    curve:[43,46,50,55,58,62,65,62,60,55,52,50,49]},
+  {rank:20,mv:0,name:"Tom Eriksson",streak:2,elite:false,score:46.2,spk:"fl",rr:6.1,trades:47,wr:51.1,avg:0.98,dd:-2.3,lastActive:"3d",markets:["EUR/USD"],
+    logs:[{n:47,d:"2025-05-09",m:"EUR/USD",s:"LONG",r:"+1.0R",res:"TP HIT"},{n:46,d:"2025-05-08",m:"EUR/USD",s:"SHORT",r:"-1.0R",res:"SL HIT"},{n:45,d:"2025-05-07",m:"EUR/USD",s:"LONG",r:"+1.2R",res:"TP HIT"},{n:44,d:"2025-05-06",m:"EUR/USD",s:"SHORT",r:"+1.0R",res:"TP HIT"}],
+    curve:[46,47,46,47,46,46,46,45,46,46,46,46,46]}
+];
+
+let openIdx = null;
+
+function spkPts(curve){
+  const h=36,w=72,pad=2;
+  const min=Math.min(...curve),max=Math.max(...curve),range=max-min||1;
+  return curve.map((v,i)=>{
+    const x=pad+(i/(curve.length-1))*(w-pad*2);
+    const y=pad+(1-(v-min)/range)*(h-pad*2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+}
+
+function chartPts(curve,W,H,pad){
+  const min=Math.min(...curve),max=Math.max(...curve),range=max-min||1;
+  return curve.map((v,i)=>{
+    const x=pad+(i/(curve.length-1))*(W-pad*2);
+    const y=pad+(1-(v-min)/range)*(H-pad*2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+}
+
+function renderRows(traders){
+  const body = document.getElementById('lb-body');
+  body.innerHTML='';
+  traders.forEach((t,i)=>{
+    const pts = spkPts(t.curve);
+    const spkCls = t.spk==='up'?'spk-up':t.spk==='dn'?'spk-dn':'spk-fl';
+    const scoreSz = t.rank<=1?'lg':t.rank<=3?'md':'sm';
+    const mvSign = t.mv>0?'up':t.mv<0?'dn':'fl';
+    const mvTxt = t.mv>0?`↑${t.mv}`:t.mv<0?`↓${Math.abs(t.mv)}`:'—';
+    const ddCls = t.dd < -4 ? 'neg' : '';
+
+    // trader row
+    const streakLine = t.spk==='dn'
+      ? `<span style="font-family:var(--mono);font-size:9px;color:#92400e;font-weight:600;letter-spacing:0.06em">On Recovery</span>`
+      : `<span style="font-family:var(--mono);font-size:9px;color:var(--blue);font-weight:600;letter-spacing:0.04em">${t.streak}-week streak</span>`;
+    const tr = document.createElement('tr');
+    tr.className='trader-row';
+    tr.dataset.idx=i;
+    tr.innerHTML=`
+      <td><div class="rk">
+        <span class="rk-n ${t.rank<=3?'top3':''}">${t.rank}</span>
+        <span class="rk-mv ${mvSign}">${mvTxt}</span>
+      </div></td>
+      <td><div class="tr-cell">
+        <div><span class="tr-nm">${t.name}</span>${t.elite?'<span class="bdg">Elite</span>':''}</div>
+        <div style="margin-top:2px">${streakLine}</div>
+      </div></td>
+      <td><span class="sc ${scoreSz}">${t.score}</span></td>
+      <td>
+        <svg width="72" height="36" viewBox="0 0 72 36">
+          <polyline class="${spkCls}" points="${pts}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </td>
+      <td><span class="dc pos">+${t.rr}R</span></td>
+      <td><span class="dc">${t.trades}</span></td>
+      <td><span class="dc">${t.wr}%</span></td>
+      <td><span class="dc">${t.avg}</span></td>
+      <td><span class="dc ${ddCls}">${t.dd}R</span></td>
+      <td>${t.lastActive==='live'
+        ?'<span class="live-badge"><span class="ldot"></span>LIVE</span>'
+        :t.lastActive==='today'
+        ?'<span class="last-act" style="color:var(--blue);font-weight:600">Today</span>'
+        :`<span class="last-act">${t.lastActive} ago</span>`
+      }</td>`;
+    tr.onclick=()=>toggleExpand(i,t);
+    body.appendChild(tr);
+
+    // expand row (hidden initially)
+    const xtr = document.createElement('tr');
+    xtr.className='expand-row';
+    xtr.id=`xrow-${i}`;
+    xtr.style.display='none';
+
+    // mini chart
+    const cW=380,cH=90,cPad=8;
+    const cPts=chartPts(t.curve,cW,cH,cPad);
+    const cFirst=cPts.split(' ')[0], cLast=cPts.split(' ').slice(-1)[0];
+    const cLastX=parseFloat(cLast.split(',')[0]),cLastY=parseFloat(cLast.split(',')[1]);
+    const maxIdx=t.curve.indexOf(Math.min(...t.curve));
+    const minV=Math.min(...t.curve),maxV=Math.max(...t.curve),rangeV=maxV-minV||1;
+    const ddX=(cPad+(maxIdx/(t.curve.length-1))*(cW-cPad*2)).toFixed(1);
+    const ddY=(cPad+(1-(minV-minV)/rangeV)*(cH-cPad*2)).toFixed(1);
+
+    xtr.innerHTML=`<td colspan="10"><div class="expand-panel">
+      <div class="ep-stats">
+        <div class="ep-stat-row"><span class="ep-stat-l">Recovery Score</span><span class="ep-stat-v big">${t.score}</span></div>
+        <div class="ep-stat-row"><span class="ep-stat-l">Total R:R</span><span class="ep-stat-v blue">+${t.rr}R</span></div>
+        <div class="ep-stat-row"><span class="ep-stat-l">Trades Registered</span><span class="ep-stat-v">${t.trades}</span></div>
+        <div class="ep-stat-row"><span class="ep-stat-l">Win Rate</span><span class="ep-stat-v">${t.wr}%</span></div>
+        <div class="ep-stat-row"><span class="ep-stat-l">Avg R:R</span><span class="ep-stat-v">${t.avg}</span></div>
+        <div class="ep-stat-row"><span class="ep-stat-l">Max Drawdown</span><span class="ep-stat-v red">${t.dd}R</span></div>
+        <button class="ep-view-btn" style="margin-top:12px">Full Profile →</button>
+      </div>
+      <div class="ep-chart">
+        <div class="ep-chart-title">Cumulative R:R</div>
+        <svg width="100%" viewBox="0 0 ${cW} ${cH+18}" style="display:block;overflow:visible">
+          <defs>
+            <linearGradient id="g${i}" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.1"/>
+              <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line x1="${cPad}" y1="${cH-cPad}" x2="${cW-cPad}" y2="${cH-cPad}" stroke="#e5e5e1" stroke-width="0.5"/>
+          <line x1="${cPad}" y1="${(cH/2).toFixed(0)}" x2="${cW-cPad}" y2="${(cH/2).toFixed(0)}" stroke="#e5e5e1" stroke-width="0.5" stroke-dasharray="2,3"/>
+          <polygon points="${cFirst.split(',')[0]},${cH-cPad} ${cPts} ${cLastX},${cH-cPad}" fill="url(#g${i})"/>
+          <polyline points="${cPts}" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="${ddX}" cy="${ddY}" r="3" fill="#fff" stroke="#b91c1c" stroke-width="1.5"/>
+          <circle cx="${cLastX}" cy="${cLastY}" r="3" fill="#1d4ed8"/>
+          <text x="${cPad}" y="${cH+14}" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#8f8f8c">Start</text>
+          <text x="${cW-cPad}" y="${cH+14}" text-anchor="end" style="font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#1d4ed8;font-weight:600">+${t.rr}R</text>
+        </svg>
+      </div>
+      <div class="ep-trades">
+        <div class="ep-trades-title">Recent Trades</div>
+        <table class="mini-tbl">
+          <thead><tr><th>#</th><th>Date</th><th>Market</th><th>Side</th><th>Result</th><th>R</th></tr></thead>
+          <tbody>
+            ${t.logs.map(l=>`<tr>
+              <td style="color:var(--t3)">${l.n}</td>
+              <td>${l.d}</td>
+              <td>${l.m}</td>
+              <td style="color:${l.s==='LONG'?'var(--blue)':'var(--red)'}">${l.s}</td>
+              <td style="color:${l.res==='TP HIT'?'var(--blue)':'var(--red)'};font-weight:600">${l.res}</td>
+              <td style="color:${l.r.startsWith('+')?'var(--blue)':'var(--red)'};font-weight:600">${l.r}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div></td>`;
+    body.appendChild(xtr);
+  });
+}
+
+function toggleExpand(idx,t){
+  const xrow=document.getElementById(`xrow-${idx}`);
+  const trow=document.querySelector(`tr[data-idx="${idx}"]`);
+  if(openIdx===idx){
+    xrow.style.display='none';
+    trow.classList.remove('open');
+    openIdx=null;
+  } else {
+    if(openIdx!==null){
+      document.getElementById(`xrow-${openIdx}`).style.display='none';
+      document.querySelector(`tr[data-idx="${openIdx}"]`)?.classList.remove('open');
+    }
+    xrow.style.display='';
+    trow.classList.add('open');
+    openIdx=idx;
+    xrow.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+}
+
+function setTab(el){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+}
+
+function filterTable(q){
+  const filtered=TRADERS.filter(t=>
+    t.name.toLowerCase().includes(q.toLowerCase())||
+    t.mkt.toLowerCase().includes(q.toLowerCase())||
+    t.markets.some(m=>m.toLowerCase().includes(q.toLowerCase()))
+  );
+  document.getElementById('count-label').textContent=`Showing ${Math.min(filtered.length,20)} of ${filtered.length} results`;
+  renderRows(filtered);
+}
+
+document.querySelectorAll('.pg').forEach(b=>{
+  b.addEventListener('click',()=>{
+    if(!isNaN(parseInt(b.textContent))){
+      document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+    }
+  });
+});
+
+renderRows(TRADERS);
+</script>
+</body>
+</html>
